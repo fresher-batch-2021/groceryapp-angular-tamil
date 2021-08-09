@@ -1,0 +1,92 @@
+<app-image-gallery></app-image-gallery>
+
+
+<div class="container">
+    
+
+    <div *ngFor="let category of products | keyvalue">
+        
+        <h3 class="text-center">{{category.key}}</h3> 
+
+        <div class="row">
+
+        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4" *ngFor="let productItem of getProductItems(category.key)">
+            <div><img src="assets/images/{{productItem.imgUrl}}" width="150px" height="150px">
+                <figcaption>{{productItem.productName}}</figcaption>
+                <p>{{productItem.unit}} {{productItem.type}} - <i class="fas fa-rupee-sign" aria-hidden="true"></i> {{productItem.price}}</p>
+                <a (click)="addCart(productItem.productName, productItem.unit, productItem.type, productItem.price)" class="add">Add</a>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+    
+
+<div class="container">
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h3 class="text-center">Popular Categories</h3>
+            <p class="brands">
+                Sunflower Oils, Wheat Atta, Ghee, Milk, Health Drinks, Flakes, Organic F&V, Namkeen, Eggs, Floor Cleaners, Other Juices,
+                Leafy Vegetables, Frozen Veg Food, Diapers & Wipes
+            </p>
+        </div>
+
+        <div class="col-lg-3">
+            <h3 class="text-center">Popular Brands</h3>
+            <p class="brands">
+                Fresho, BB Royal, Nandini, Kelloggs, 24 Mantra, Saffola, Lizol, Safal, Horlicks, MTR, Fresho Meats, Whisper , Real, Milky
+                Mist, Nivea, Himalaya, Comfort, Sunpure , Bru , Zespri
+            </p>
+        </div>
+
+        <div class="col-lg-3">
+            <h3 class="text-center">Cities We Serve</h3>
+            <p class="brands">
+                Bangalore, Hyderabad, Mumbai, Pune, Chennai, Delhi, Mysore, Madurai, Coimbatore, Vijayawada-Guntur, Kolkata, Ahmedabad-Gandhinagar,
+                Nashik, Lucknow-Kanpur, Gurgaon, Vadodara, Visakhapatnam, Surat, Nagpur, Patna, Indore, Chandigarh Tricity,
+                Jaipur, Bhopal, Noida-Ghaziabad, Kochi, Krishna District,
+            </p>
+        </div>
+
+        <div class="col-lg-3 text-center">
+            <h3>Payment Options</h3>
+            <img class="pay" src="assets/images/payment/paytm.png" alt="" width="25%" height="25%">
+            <img class="paypal" src="assets/images/payment/paypal.png" alt="" width="30%" height="30%">
+            <br>
+            <img class="pay" src="assets/images/payment/visa.png" alt="" width="25%" height="25%">
+            <img class="pay" src="assets/images/payment/mastercard.png" alt="" width="25%" height="25%">
+            <br>
+            <img class="pay" src="assets/images/payment/gpay.png" alt="" width="25%" height="25%">
+            <img class="pay" src="assets/images/payment/americanexpress.png" alt="" width="25%" height="25%">
+
+        </div>
+    </div>
+
+
+</div>
+  
+    <!-- <div class="container" *ngFor="let category of products | keyvalue" class="row">
+
+        <hr/>
+
+        <h3 class="text-center">{{category.key}}</h3>
+
+        <div class="row" *ngFor="let productItem of getProductItems(category.key)">
+
+            <div class="col-lg-2">
+                <img class="im" src="assets/images/{{productItem.imgUrl}}" alt="Apple" width="150px" height="150px">
+                <br>
+                <h6>{{productItem.productName}}</h6>
+                <p>{{productItem.unitType}} -
+                    <i class="fas fa-rupee-sign" aria-hidden="true"></i> {{productItem.price}}</p>
+                <a class="add" routerLink="/ordernow?productName={{productItem.productName}}&Kg={{productItem.unitType}}&price={{productItem.price}}">Add</a>
+            </div>
+
+        </div>
+    </div> -->

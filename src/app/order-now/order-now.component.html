@@ -1,0 +1,66 @@
+<!-- order form start -->
+
+    <div>
+        <h3 class="text-center">Order Now</h3>
+                <div class="text-center">
+                    <label id="email">{{email}}</label>
+                </div>
+
+            <table border="1" aria-describedby="mydesc">
+                <thead>
+                    <tr>
+                        <th scope="col">S.no</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody  id="table">
+                    <tr *ngFor="let item of cartItems;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{item.productName}}</td>
+                        <td>{{item.qty}}</td>
+                        <td>{{item.price}}</td>
+                    </tr>
+                   
+                    <tr>
+                        <td colspan="3" class="total">Total </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" (click)="confirmOrder()" type="submit">Confirm Order</button>
+        </div>
+<!-- order form end -->
+
+<script>
+const params = new URLSearchParams(window.location.search.substr(1));
+let addpro = params.get("productName");
+let addQty = params.get("Kg") || params.get("Ltr");
+let addPrice = params.get("price");
+console.log(addpro);
+console.log(addQty)
+console.log(addPrice);
+
+let addtablearray =  { product: addpro, qty: addQty, price: addPrice};
+console.log(addtablearray);
+const cartItems = JSON.parse(localStorage.getItem("CART_ITEMS")) || [];
+cartItems.push(addtablearray);
+localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
+tabledatas();
+
+function confirmOrder()
+{
+ if(emailadd == "" || emailadd == null || emailadd == undefined)
+ {
+    alert("Please Register or Login");
+ }   
+ else
+ {
+    alert("Ordered Successfully");
+    document.location.reload(true);
+    window.localStorage.clear(true);
+ }
+}
+</script>
+
+<!-- table array script end -->
