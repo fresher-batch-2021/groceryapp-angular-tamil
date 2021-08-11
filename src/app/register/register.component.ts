@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,7 +11,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm : FormGroup;
 
-  constructor(private fb : FormBuilder) 
+  constructor(private fb : FormBuilder,
+    private http : HttpClient) 
   {
     this.registerForm = this.fb.group({
       username : new FormControl('', Validators.required),
@@ -26,8 +28,23 @@ export class RegisterComponent implements OnInit {
 
   register()
   {
-    console.log("res", this.registerForm.value);
+    console.log("username", this.registerForm.value.username);
+    console.log("phoneno", this.registerForm.value.phoneno)
     console.log("email", this.registerForm.value.email);
     console.log("password", this.registerForm.value.password);
+
+    var registerObj = {
+      name : this.registerForm.value.username,
+      mobileNo : this.registerForm.value.phoneno,
+      email : this.registerForm.value.email,
+      password : this.registerForm.value.password
+    }
+    console.log("registerObj", registerObj);
+
+    const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/auth/register";
+    this.http.post(url, registerObj).subscribe((res) => {
+      console.log("res", res);
+      window.location.href = "/login";
+    })
   }
 }
