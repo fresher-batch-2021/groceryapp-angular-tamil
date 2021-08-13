@@ -36,19 +36,47 @@ export class LoginComponent implements OnInit {
     this.password = this.loginForm.value.password;
     this.remember = this.loginForm.value.remember;
 
-    const loginObj = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
+    if(this.loginForm.value.email === null || this.loginForm.value.email.trim() === "")
+    {
+      alert("Email Address is Invalid");
     }
-    console.log("loginObj", loginObj);
+    else if(this.loginForm.value.password === null || this.loginForm.value.password.trim() === "")
+    {
+      alert("Password is Invalid");
+    }
+    else
+    {
+      const loginObj = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      }
 
-    const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/auth/login";
-    this.http.post(url, loginObj).subscribe((res) => {
-      console.log("res", res);
-      localStorage.setItem("emailAddress", this.email);
-      this.router.navigate(["/home"]);
-      alert("Login Successfully");
-    })
-
+      if(this.loginForm.value.email === null || this.loginForm.value.email.trim() == "")
+      {
+        alert("Email is mandatory");
+      }
+      else if(this.loginForm.value.password === null || this.loginForm.value.password.trim() === "")
+      {
+        alert("Password is mandatory");
+      }
+      else if(this.loginForm.value.password >= 6 || this.loginForm.value.password <= 8)
+      {
+        alert("Password minimum 6 to 8 characters");
+      }
+      else
+      {
+        console.log("loginObj", loginObj);
+  
+        const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/auth/login";
+        this.http.post(url, loginObj).subscribe((res) => {
+          console.log("res", res);
+          localStorage.setItem("emailAddress", this.email);
+          this.router.navigate(["/home"]);
+          alert("Login Successfully");
+        }, err => {
+          alert("Invalid Username or Password");
+        })
+      }
+    }
   }
 }

@@ -9,48 +9,45 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  product : any;
-  unit : any;
-  price : any;
+  product: any;
+  unit: any;
+  price: any;
 
 
   constructor(private router: Router,
-    private http : HttpClient) 
-    {
-      this.getProduct();
-    }
+    private http: HttpClient) {
+    this.getProduct();
+  }
 
-    products:any;
+  products: any;
   ngOnInit(): void {
   }
 
-  gotoCart(productName:string,price:number){
+  gotoCart(productName: string, price: number) {
     this.router.navigateByUrl("ordernow?productName=Apple&Kg=1&price=120");
   }
 
-  getProduct()
-  {
+  getProduct() {
     const url = "assets/products.json";
     this.http.get(url).subscribe((res) => {
       this.products = res;
       console.log(this.products);
-     /*let categories = Object.keys(products);
-      console.log("keys",categories);
-      for( let category of categories)
-      {
-        const productItems = products[category];
-        console.log("category",category);
-        console.log(productItems);
-      }*/
+      /*let categories = Object.keys(products);
+       console.log("keys",categories);
+       for( let category of categories)
+       {
+         const productItems = products[category];
+         console.log("category",category);
+         console.log(productItems);
+       }*/
     })
   }
 
-  getProductItems(category:any){
+  getProductItems(category: any) {
     return this.products[category];
   }
 
-  addCart(product : string, unit : number, type : string, price : string)
-  {
+  addCart(product: string, unit: number, type: string, price: string) {
     console.log("product :", product);
     console.log("unit :", unit);
     console.log("type :", type)
@@ -58,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.product = product;
     this.unit = unit;
     this.price = price;
-    this.router.navigateByUrl("ordernow?productName="+this.product+"&Kg="+this.unit+"&price="+this.price);
+    this.router.navigateByUrl("ordernow?productName=" + this.product + "&Kg=" + this.unit + "&price=" + this.price);
 
   }
 }
