@@ -38,10 +38,19 @@ export class HomeComponent implements OnInit {
   // }
 
   getProduct() {
+
+    const dbUsername = "apikey-v2-1xzbb618xtgfg14nm7uasm9coajsc9dzzpg8p57atbtg";
+    const dbPassword = "f56766c5716a7b37a531aaa7bdb53315";
+    const basicAuth = "Basic " + btoa(dbUsername + ":" + dbPassword);
+
     // const url = "assets/products.json";
-    const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/products";
-    this.http.get(url).subscribe((res) => {
-      this.products = res;
+    // const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/products";
+    const url = "https://8ca8138b-1aac-430a-8325-3a686242a515-bluemix.cloudantnosqldb.appdomain.cloud/grocerystoreapp_products/_all_docs?include_docs=true";
+    this.http.get(url, { headers: { Authorization: basicAuth } }).subscribe((res : any) => {
+      let data:any = res.rows;
+
+      this.products = data.map((obj:any)=>obj.doc);
+      console.log("pro", this.products);
       // console.log(this.products);
       this.categories = _.groupBy(this.products, 'category');
       console.log("categories", this.categories);
