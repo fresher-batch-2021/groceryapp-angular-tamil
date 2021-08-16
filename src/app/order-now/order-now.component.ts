@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartServiceService } from '../cart-service.service';
 
 @Component({
   selector: 'app-order-now',
@@ -8,64 +9,43 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderNowComponent implements OnInit {
 
-  cartItems:any;
+  cartItems: any;
 
-  email:string | null;
+  email: string | null;
 
-  cartItem = { productName: null, price: null, qty : null};
+  constructor(private route: ActivatedRoute,
+    private service: CartServiceService) {
 
-  constructor(private route:ActivatedRoute) { 
-
-    this.cartItem["productName"] = this.route.snapshot.queryParams["productName"];
-    this.cartItem["qty"] = this.route.snapshot.queryParams["Kg"];
-    this.cartItem["price"] = this.route.snapshot.queryParams["price"];
-    
+    this.cartItems = this.service.getCartItems();
+    console.log("cart", this.cartItems);
     this.email = localStorage.getItem("emailAddress");
     console.log("email", this.email);
-    this.cartItems = this.getCartItems();
-   }
-
-  ngOnInit(): void {
-
-    this.addToCart();
-    this.loadCartItems();
   }
 
-  //get cart items from localStorage
-  getCartItems(){
+  ngOnInit(): void { }
 
-    let cartItemStr = localStorage.getItem("CART_ITEMS");
-    let cartItems =  cartItemStr != null ? JSON.parse(cartItemStr) : [];
-    return cartItems;
 
-  }
-
-  // add item to cart
-  addToCart(){
-    if (this.cartItem.productName != null && this.cartItem.price != null){
-    this.cartItems.push(this.cartItem);
-    localStorage.setItem("CART_ITEMS", JSON.stringify(this.cartItems));
-    }
-  }
-
-  //get cart items 
-  loadCartItems(){
-
-    this.cartItems = this.getCartItems();
-  }
-
-  confirmOrder()
-  {
-    if(this.email != null && this.email != "")
-    {
+  confirmOrder() {
+    if (this.email != null && this.email != "") {
       alert("Order Add Successfully");
-      window.localStorage.clear();
-      window.location.reload();
+      let orderData = {
+        items: this.cartItems,
+        createdBy: this.email
+      }
+      this.service.placeOrder(orderData).subscribe(res => {
+        this.service.emptyCart();
+        window.location.reload();
+      })
+
     }
-    else
-    {
+    else {
       alert("please login or register");
       window.location.href = "/login";
     }
+  }
+
+  emptyCart() {
+    localStorage.removeItem("CART_ITEMS");
+    document.location.reload();
   }
 }

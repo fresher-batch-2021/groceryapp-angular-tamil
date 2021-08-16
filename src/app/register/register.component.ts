@@ -14,9 +14,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private http: HttpClient) {
     this.registerForm = this.fb.group({
-      username: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required, Validators.pattern("^[[A-Z]|[a-z]][[A-Z]|[a-z]|\\d|[_]]{7,29}$")]),
       phoneno: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{6,8}')]),
       remember: new FormControl(false, Validators.required)
     })
@@ -48,14 +48,21 @@ export class RegisterComponent implements OnInit {
         name: this.registerForm.value.username,
         mobileNo: this.registerForm.value.phoneno,
         email: this.registerForm.value.email,
-        password: this.registerForm.value.password
+        password: this.registerForm.value.password,
+        role : "user"
       }
       console.log("registerObj", registerObj);
 
-      const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/auth/register";
-      this.http.post(url, registerObj).subscribe((res) => {
+      const dbUsername = "apikey-v2-1xzbb618xtgfg14nm7uasm9coajsc9dzzpg8p57atbtg";
+      const dbPassword = "f56766c5716a7b37a531aaa7bdb53315";
+      const basicAuth = "Basic " + btoa(dbUsername + ":" + dbPassword);
+
+      const url = "https://8ca8138b-1aac-430a-8325-3a686242a515-bluemix.cloudantnosqldb.appdomain.cloud/grocerystoreapp_users";
+      this.http.post(url, registerObj, {headers: { Authorization : basicAuth}}).subscribe((res) => {
         console.log("res", res);
         window.location.href = "/login";
+      }, err => {
+        alert("Register Error");
       })
     }
   }
