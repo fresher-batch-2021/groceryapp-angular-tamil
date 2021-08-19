@@ -1,0 +1,179 @@
+<div class="Panel">
+    <h3 class="text-center">Admin Panel</h3>
+    
+
+    <form [formGroup]="listUsersForm">
+        <div>
+            <input type="radio" formControlName="result" name="result" id="result" (change)="radioValues()" value="admin"> &nbsp;
+            <label for="adminList">List of Admin</label>
+        </div>
+    
+        <div>
+            <input type="radio" formControlName="result" name="result" (change)="radioValues()" id="result" value="user"> &nbsp;
+            <label for="userList">List of User</label>
+        </div>
+        <div>
+            <input formControlName="result" type="radio" (change)=radioValues() name="result" id="result" value="productList"> &nbsp;
+            <label for="addProduct">List of Product</label>
+        </div>
+        <div>
+            <input formControlName="result" type="radio" (change)=radioValues() name="result" id="result" value="addProductToList"> &nbsp;
+            <label for="addProduct">Add Product</label>
+        </div>
+        <div>
+            <input formControlName="result" type="radio" (change)=radioValues() name="result" id="result" value="removeProduct"> &nbsp;
+            <label for="addProduct">Remove Product</label>
+        </div>
+        <div>
+            <input formControlName="result" type="radio" (change)=radioValues() name="result" id="result" value="placeOrders"> &nbsp;
+            <label for="addProduct">Orders</label>
+        </div>
+    </form>
+
+    <!-- <button routerLink="userList">Add Product</button> -->
+     <!-- <router-outlet></router-outlet> -->
+
+    <form [formGroup]="addProductForm" (ngSubmit)="addProduct()" class="addProductForm" *ngIf="userType == 'addProductToList'">
+        <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" formControlName="productName" class="form-control" name="productName" id="productName">
+        </div>
+        <div class="form-group">
+            <label for="unit">Unit</label>
+            <input formControlName="unit" class="form-control" type="number" name="unit" id="unit">
+        </div>
+        <div class="form-group">
+            <select name="type" id="type" formControlName="type">
+                <option value="" disabled hidden>Select Product Type</option>
+                <option value="Kg">Kg</option>
+                <option value="Pc">Pc</option>
+                <option value="Ltr">Ltr</option>
+            </select>          
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input formControlName="price" type="number" class="form-control" name="price" id="price">
+        </div>
+        <div class="form-group">
+            <label for="imgUrl">Image Url</label>
+            <input formControlName="imgUrl" type="text" class="form-control" name="imgUrl" id="imgUrl">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <table border="1" aria-describedby="mydesc" *ngIf = "userType == 'user'">
+        <thead>
+            <th scope="col">S.no</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Email Address</th>
+        </thead>
+        <tbody *ngFor = "let users of userDataList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{users.name}}</td>
+            <td>{{users.mobileNo}}</td>
+            <td>{{users.email}}</td>
+        </tbody>
+    </table>
+
+    <table border="1" aria-describedby="mydesc" *ngIf = "userType == 'admin'">
+        <thead>
+            <th scope="col">S.no</th>
+            <th scope="col">Admin Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Email Address</th>
+        </thead>
+        <tbody *ngFor = "let users of adminDataList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{users.name}}</td>
+            <td>{{users.mobileNo}}</td>
+            <td>{{users.email}}</td>
+        </tbody>
+    </table>
+
+    <table border="1" aria-describedby="mydesc" *ngIf = "userType == 'removeProduct'">
+        <thead>
+            <th scope="col">S.no</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">imageUrl</th>
+            <th scope="col">Category</th>
+            <th scope="col">Action</th>
+        </thead>
+        <tbody *ngFor="let list of productList; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{list.name}}</td>
+            <td>{{list.price}}</td>
+            <td>{{list.imageUrl}}</td>
+            <td>{{list.category}}</td>
+            <td><a (click)="removeProduct(list._id, list._rev)">Delete</a></td>
+        </tbody>
+    </table>
+
+    <table border="1" aria-describedby="mydesc" *ngIf = "userType == 'productList'">
+        <thead>
+            <th scope="col">S.no</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">imageUrl</th>
+            <th scope="col">Category</th>
+        </thead>
+        <tbody *ngFor="let list of productList; let i=index">       
+            <td>{{i+1}}</td>   
+            <td>{{list.name}}</td>
+            <td>{{list.price}}</td>
+            <td>{{list.imageUrl}}</td>
+            <td>{{list.category}}</td>
+        </tbody>
+    </table>
+
+   <div >
+    <table border="1" aria-describedby="mydesc" *ngIf = "userType == 'placeOrders'"> 
+        <thead>
+            <th scope="col">S.no</th>
+            <th scope="col">Items
+               
+            </th>
+            <th scope="col">Ordered By</th>
+            <th scope="col">Ordered Date</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </thead>
+        <tbody *ngFor="let place of placeOrderList; let i=index;">
+            <td>{{i+1}}</td>
+            <td>
+                <ul class="text-center unorderedlist">
+                    <li *ngFor="let item of place.items">
+                        {{item.productName}} - {{item.unit}} - Rs. {{item.price}} - Rs. {{item.totalPrice}}
+                    </li>
+                </ul>
+                <!-- <table border="1" aria-describedby="mydesc">
+                    <thead class="thead2">
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of place.items">
+                        <td>{{item.productName}}</td>
+                        <td>{{item.unit}} Kg</td>
+                        <td>{{item.price}}</td>
+                        </tr>
+                    </tbody>
+                </table> -->
+            </td>
+            <td>{{place.createdBy}}</td>
+            <td>{{place.date | date: "dd-MMM-yyyy"}}</td>
+            <td>Coming Soon</td>
+            <td>{{place.status}}</td>
+            <!-- <td>{{place._id}}</td>
+            <td>{{place._rev}}</td> -->
+            <td><a href="adminPanel" (click)="changeDelivered(place._id, place._rev)">Deliver</a> &nbsp; <a href="/adminPanel">Cancel</a></td>
+        </tbody>
+    </table>
+   </div>
+
+</div>

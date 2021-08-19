@@ -15,7 +15,7 @@
                     <figcaption>{{productItem.name}}</figcaption>
                     <p>{{productItem.unit}} {{productItem.type}} - <i class="fas fa-rupee-sign" aria-hidden="true"></i>
                         {{productItem.price}}</p>
-                    <a (click)="addCart(productItem.id, productItem.productName, productItem.unit, productItem.type, productItem.price)"
+                    <a (click)="addCart(productItem.id, productItem.name, productItem.unit, productItem.type, productItem.price)"
                         class="add">Add</a>
                 </div>
             </div>

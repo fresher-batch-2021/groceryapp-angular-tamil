@@ -4,6 +4,12 @@
     margin: 0px;
     padding: 0px;
 }
+body
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 p
 {
     color: slategray;
@@ -21,11 +27,7 @@ p
     color: mediumseagreen;
     font-size: 35px;
 }
-*
-{
-    margin: 0;
-    padding: 0;
-}
+
 .im:hover
 {
     width: 180px;

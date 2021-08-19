@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
+import { OrderService } from '../order.service';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-order-now',
@@ -13,13 +15,16 @@ export class OrderNowComponent implements OnInit {
 
   email: string | null;
 
+
   constructor(private route: ActivatedRoute,
-    private service: CartServiceService) {
+    private service: CartServiceService,
+    private orderService : OrderService) {
 
     this.cartItems = this.service.getCartItems();
     console.log("cart", this.cartItems);
     this.email = localStorage.getItem("emailAddress");
     console.log("email", this.email);
+
   }
 
   ngOnInit(): void { }
@@ -30,9 +35,13 @@ export class OrderNowComponent implements OnInit {
       alert("Order Add Successfully");
       let orderData = {
         items: this.cartItems,
-        createdBy: this.email
+        createdBy: this.email,
+        status: "order",
+        date: new Date()
       }
-      this.service.placeOrder(orderData).subscribe(res => {
+      console.log("e", orderData);
+
+      this.orderService.placeOrder(orderData).subscribe(res => {
         this.service.emptyCart();
         window.location.reload();
       })
@@ -46,6 +55,12 @@ export class OrderNowComponent implements OnInit {
 
   emptyCart() {
     localStorage.removeItem("CART_ITEMS");
+    document.location.reload();
+  }
+
+  removeItem(product : any)
+  {
+    this.service.removeItem(product);
     document.location.reload();
   }
 }

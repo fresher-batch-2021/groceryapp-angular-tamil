@@ -13,6 +13,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { RemoveProductComponent } from './remove-product/remove-product.component';
+import { PlaceOrdersComponent } from './place-orders/place-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +31,15 @@ import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
     AboutComponent,
     HeaderComponent,
     FooterComponent,
-    ImageGalleryComponent
+    ImageGalleryComponent,
+    AdminComponent,
+    AdminPanelComponent,
+    AdminListComponent,
+    UserListComponent,
+    ProductListComponent,
+    AddProductComponent,
+    RemoveProductComponent,
+    PlaceOrdersComponent
   ],
   imports: [
     BrowserModule,

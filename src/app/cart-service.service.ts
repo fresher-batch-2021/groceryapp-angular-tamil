@@ -24,12 +24,21 @@ export class CartServiceService {
 
   }
 
-  placeOrder(orderData: any) {
-    let url = "";
-    return this.http.post(url, orderData);
-  }
+
 
   emptyCart() {
     localStorage.removeItem("CART_ITEMS");
+  }
+
+  removeItem(product : any)
+  {
+    let cartItems = this.getCartItems();
+    let index = cartItems.map((obj : any) => obj.productName == product);
+    console.log("index", index);
+    if(index != -1)
+    {
+      cartItems.splice(index, 1);
+    }
+    localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Userservice } from '../userservice';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private userService : Userservice) {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{6,8}')]),
@@ -62,15 +64,7 @@ export class LoginComponent implements OnInit {
       }
       else {
 
-        const dbUsername = "apikey-v2-1xzbb618xtgfg14nm7uasm9coajsc9dzzpg8p57atbtg";
-        const dbPassword = "f56766c5716a7b37a531aaa7bdb53315";
-        const basicAuth = "Basic " + btoa(dbUsername + ":" + dbPassword);
-
-        // console.log("loginObj", loginObj);
-
-        // const url = "https://product-mock-api.herokuapp.com/groceryapp/api/v1/auth/login";
-        const url = "https://8ca8138b-1aac-430a-8325-3a686242a515-bluemix.cloudantnosqldb.appdomain.cloud/grocerystoreapp_users/_find";
-        this.http.post(url, loginObj, { headers: { Authorization: basicAuth } }).subscribe((res : any) => {
+        this.userService.userLogin(loginObj).subscribe((res : any) => {
           let userData = res.docs;
           console.log("userData", userData);
           if(userData.length === 0)

@@ -11,7 +11,7 @@
 
     <div class="form-group">
       <label for="username">UserName <sup>*</sup></label>
-      <input formControlName="username" class="form-control" type="text" name="username" id="username"
+      <input formControlName="username" class="form-control" type="text" name="username" id="username" pattern="[a-zA-Z]{3,20}"
         placeholder="Enter name" autofocus autocomplete="off" required>
       <span *ngIf="registerForm.controls.username.errors && registerForm.controls.username.dirty" class="danger"
         padding>Username is not valid.</span>

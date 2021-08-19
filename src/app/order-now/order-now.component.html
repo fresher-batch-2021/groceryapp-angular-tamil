@@ -14,6 +14,7 @@
                         <th scope="col">Qty</th>
                         <th scope="col">Price</th>
                         <th scope="col">Total Price</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody  id="table">
@@ -23,6 +24,7 @@
                         <td>{{item.unit}}</td>
                         <td>{{item.price}}</td>
                         <td>{{item.totalPrice}}</td>
+                        <td><a href="ordernow" (click)="removeItem(item.productName)">Delete</a></td>
                     </tr>
                    
                     <!-- <tr>

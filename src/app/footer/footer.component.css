@@ -1,6 +1,14 @@
 footer
 {
-    color: slategray;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    color: slategray;    
+    /* position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: black; */
 }
+/* .footerPosition
+{
+    position: relative;
+    min-height: 100vh;
+} */
