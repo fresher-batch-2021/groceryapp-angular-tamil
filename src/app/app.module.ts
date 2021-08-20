@@ -21,6 +21,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { RemoveProductComponent } from './remove-product/remove-product.component';
 import { PlaceOrdersComponent } from './place-orders/place-orders.component';
+import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
+import { SearchPipe } from './search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { PlaceOrdersComponent } from './place-orders/place-orders.component';
     ProductListComponent,
     AddProductComponent,
     RemoveProductComponent,
-    PlaceOrdersComponent
+    PlaceOrdersComponent,
+    SideNavBarComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

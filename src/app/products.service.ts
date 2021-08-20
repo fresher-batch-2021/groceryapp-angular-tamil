@@ -19,9 +19,9 @@ export class ProductsService {
     return this.http.get(this.url+"/_all_docs?include_docs=true", { headers: { Authorization: this.basicAuth } })
   }
 
-  addNewProducts()
+  addNewProducts(addProductObj : any)
   {
-    return this.http.get(this.url, { headers: { Authorization: this.basicAuth } })
+    return this.http.post(this.url, addProductObj, { headers: { Authorization: this.basicAuth } })
   }
 
   removeProducts(id : any, rev : any)

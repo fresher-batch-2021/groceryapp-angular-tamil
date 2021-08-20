@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Userservice } from '../userservice';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  userDataList: any;
+
+
+  constructor(private userService : Userservice) 
+  { 
+    this.userList();
+  }
 
   ngOnInit(): void {
+  }
+
+  userList() {
+    let userList = {
+      "selector": {
+        "role": "user"
+      },
+      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+    }
+
+
+    this.userService.userList(userList).subscribe((res: any) => {
+      this.userDataList = res.docs;
+      console.log("datalist", this.userDataList);
+    }, err => {
+      alert("Register Error");
+    })
   }
 
 }

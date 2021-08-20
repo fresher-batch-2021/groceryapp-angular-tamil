@@ -15,6 +15,7 @@ import { PlaceOrdersComponent } from './place-orders/place-orders.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { RegisterComponent } from './register/register.component';
 import { RemoveProductComponent } from './remove-product/remove-product.component';
+import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
@@ -46,26 +47,31 @@ const routes: Routes = [
     path: "admin", component: AdminComponent,
   },
   {
-    path: "adminPanel", component: AdminPanelComponent,
-  },
-  {
-    path: "adminList", component: AdminListComponent,
-  },
-  {
-    path: "userList", component: UserListComponent
-  },
-  {
-    path: "productList", component: ProductListComponent
-  },
-  {
-    path: "addProduct", component: AddProductComponent
-  },
-  {
-    path: "removeProduct", component: RemoveProductComponent
-  },
-  {
-    path: "placeOrders", component: PlaceOrdersComponent
-  }
+    path: "adminPanel", component: AdminPanelComponent, children: [
+      
+      {
+        path: "", redirectTo: "adminList", pathMatch: "full"
+      },
+      {
+        path: "adminList", component: AdminListComponent,
+      },
+      {
+        path: "userList", component: UserListComponent
+      },
+      {
+        path: "productList", component: ProductListComponent
+      },
+      {
+        path: "addProduct", component: AddProductComponent
+      },
+      {
+        path: "removeProduct", component: RemoveProductComponent
+      },
+      {
+        path: "placeOrders", component: PlaceOrdersComponent
+      }
+    ]
+  }, 
 ];
 
 @NgModule({

@@ -1,1 +1,15 @@
-<p>user-list works!</p>
+<h3 class="text-center">List of Users</h3>
+<table border="1" aria-describedby="mydesc">
+    <thead>
+        <th scope="col">S.no</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Email Address</th>
+    </thead>
+    <tbody *ngFor = "let users of userDataList; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{users.name}}</td>
+        <td>{{users.mobileNo}}</td>
+        <td>{{users.email}}</td>
+    </tbody>
+</table>

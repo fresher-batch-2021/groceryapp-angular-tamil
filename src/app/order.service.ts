@@ -25,4 +25,9 @@ export class OrderService {
     return this.http.get(this.url+"/_all_docs?include_docs=true", { headers: { Authorization: this.basicAuth } })
   }
 
+  updateStatus(order : any)
+  {
+    return this.http.put(this.url+"/"+order._id+"?rev="+order._rev, order, { headers: { Authorization: this.basicAuth } })
+  }
+ 
 }

@@ -1,1 +1,19 @@
-<p>remove-product works!</p>
+<h3 class="text-center">Product Remove to List</h3>
+<table border="1" aria-describedby="mydesc">
+    <thead>
+        <th scope="col">S.no</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">imageUrl</th>
+        <th scope="col">Category</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody *ngFor="let list of productList; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{list.name}}</td>
+        <td>{{list.price}}</td>
+        <td>{{list.imageUrl}}</td>
+        <td>{{list.category}}</td>
+        <td><a href="/removeProduct" (click)="removeProduct(list._id, list._rev)">Delete</a></td>
+    </tbody>
+</table>
