@@ -1,44 +1,41 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ProductsService } from '../products.service';
 import * as _ from 'lodash';
 import { CartServiceService } from '../cart-service.service';
-import { ProductsService } from '../products.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-spicy-chips',
+  templateUrl: './spicy-chips.component.html',
+  styleUrls: ['./spicy-chips.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  product: any;
-  unit: any;
-  price: any;
+export class SpicyChipsComponent implements OnInit {
 
   products: any;
   categories: any;
 
-  itemslist: any;
+  view: any;
+  viewCategory: any;
+  items: any;
 
-  totalPrice: any;
+  selectedCategory: any;
 
-  constructor(private router: Router,
-    private cartService: CartServiceService,
-    private http: HttpClient,
-    private productService: ProductsService) {
+  
+  totalPrice : any;
+  itemslist : any;
 
+  constructor(private productService: ProductsService,
+    private cartService : CartServiceService) 
+    {
+    this.view = localStorage.getItem("viewCategory");
+    this.viewCategory = JSON.parse(this.view);
+    console.log("view", this.viewCategory);
     this.getProduct();
   }
-
-
 
   ngOnInit(): void {
   }
 
-  // gotoCart(productName: string, price: number) {
-  //   this.router.navigateByUrl("ordernow?productName=Apple&Kg=1&price=120");
-  // }
+
 
   getProduct() {
 
@@ -48,8 +45,18 @@ export class HomeComponent implements OnInit {
       this.products = data.map((obj: any) => obj.doc);
       console.log("pro", this.products);
       // console.log(this.products);
+
       this.categories = _.groupBy(this.products, 'category');
-      console.log("categories", this.categories);
+      console.log("categories", this.categories.Cookies);
+      this.items = this.categories.Cookies;
+      console.log("items", this.items);
+
+      // for(let cat of this.categories){
+      //   if(cat == "Fruits" && this.viewCategory == "Fruits"){
+      //     console.log(cat);
+      //   }
+      // }
+
       /*let categories = Object.keys(products);
        console.log("keys",categories);
        for( let category of categories)
@@ -59,10 +66,6 @@ export class HomeComponent implements OnInit {
          console.log(productItems);
        }*/
     })
-  }
-
-  getProductItems(category: any) {
-    return this.categories[category];
   }
 
   addCart(id: number, productName: string, qty: number, type: string, price: number) {
@@ -92,37 +95,4 @@ export class HomeComponent implements OnInit {
 
   }
 
-  view(viewCategory : any)
-  {
-    console.log("view", viewCategory);
-    if(viewCategory == "Fruits")
-    {
-      localStorage.setItem("viewCategory", JSON.stringify(viewCategory));
-      window.location.href = "/fruits";
-    }
-    else if(viewCategory == "Soft Drinks")
-    {
-      window.location.href = "/softDrinks";
-    }
-    else if(viewCategory == "Cookies")
-    {
-      window.location.href = "/cookies";
-    }
-    else if(viewCategory == "Vegetables")
-    {
-      window.location.href = "/vegetables";
-    }
-    else if(viewCategory == "Vegetable Oils")
-    {
-      window.location.href = "/vegetableOils";
-    }
-    else if(viewCategory == "Dry Fruits")
-    {
-      window.location.href = "/dryFruits";
-    }
-    else if(viewCategory == "Spicy Chips")
-    {
-      window.location.href = "/spicyChips";
-    }
-  }
 }

@@ -23,6 +23,13 @@ import { RemoveProductComponent } from './remove-product/remove-product.componen
 import { PlaceOrdersComponent } from './place-orders/place-orders.component';
 import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
 import { SearchPipe } from './search.pipe';
+import { FruitsComponent } from './fruits/fruits.component';
+import { VegetablesComponent } from './vegetables/vegetables.component';
+import { SpicyChipsComponent } from './spicy-chips/spicy-chips.component';
+import { VegetableOilsComponent } from './vegetable-oils/vegetable-oils.component';
+import { SoftDrinksComponent } from './soft-drinks/soft-drinks.component';
+import { DryFruitsComponent } from './dry-fruits/dry-fruits.component';
+import { CookiesComponent } from './cookies/cookies.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +50,14 @@ import { SearchPipe } from './search.pipe';
     RemoveProductComponent,
     PlaceOrdersComponent,
     SideNavBarComponent,
-    SearchPipe
+    SearchPipe,
+    FruitsComponent,
+    VegetablesComponent,
+    SpicyChipsComponent,
+    VegetableOilsComponent,
+    SoftDrinksComponent,
+    DryFruitsComponent,
+    CookiesComponent
   ],
   imports: [
     BrowserModule,

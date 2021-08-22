@@ -6,7 +6,10 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
+import { CookiesComponent } from './cookies/cookies.component';
+import { DryFruitsComponent } from './dry-fruits/dry-fruits.component';
 import { FooterComponent } from './footer/footer.component';
+import { FruitsComponent } from './fruits/fruits.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +19,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { RegisterComponent } from './register/register.component';
 import { RemoveProductComponent } from './remove-product/remove-product.component';
 import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
+import { SoftDrinksComponent } from './soft-drinks/soft-drinks.component';
+import { SpicyChipsComponent } from './spicy-chips/spicy-chips.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { VegetableOilsComponent } from './vegetable-oils/vegetable-oils.component';
+import { VegetablesComponent } from './vegetables/vegetables.component';
 
 const routes: Routes = [
   {
@@ -72,6 +79,27 @@ const routes: Routes = [
       }
     ]
   }, 
+  {
+    path: "fruits", component: FruitsComponent
+  },
+  {
+    path: "cookies", component: CookiesComponent
+  },
+  {
+    path: "vegetables", component: VegetablesComponent
+  },
+  {
+    path: "softDrinks", component: SoftDrinksComponent
+  },
+  {
+    path: "dryFruits", component: DryFruitsComponent
+  },
+  {
+    path: "spicyChips", component: SpicyChipsComponent
+  },
+  {
+    path: "vegetableOils", component: VegetableOilsComponent
+  }
 ];
 
 @NgModule({
