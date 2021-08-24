@@ -70,6 +70,10 @@ p
     color: white;
     text-decoration: none;
 }
+
+a[routerLink] {
+    cursor: pointer;
+}
 /* .container
 {
     text-align: center;

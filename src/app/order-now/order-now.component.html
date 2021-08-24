@@ -21,7 +21,7 @@
                     <tr *ngFor="let item of cartItems;let i=index">
                         <td>{{i+1}}</td>
                         <td>{{item.productName}}</td>
-                        <td>{{item.unit}}</td>
+                        <td><input type="number" [(ngModel)]="cartItems[i].unit" (change)="updatePrice(i)"></td>
                         <td>{{item.price}}</td>
                         <td>{{item.totalPrice}}</td>
                         <td><a href="ordernow" (click)="removeItem(item.productName)">Delete</a></td>
@@ -31,8 +31,12 @@
                         <td colspan="3" class="total">Total </td>
                     </tr> -->
                 </tbody>
+                <tfoot>
+                    <tr><th colspan="4">Total Amount</th><th>Rs.{{totalBillAmount}}</th></tr>
+                </tfoot>
             </table>
             <div class="text-center">
+                <button class="btn btn-secondary" type="button" routerLink="/home">Order More</button>
                 <button class="btn btn-danger" type="button" (click)="emptyCart()">Empty Cart</button>
                 <button class="btn btn-primary" type="button" (click)="confirmOrder()">Confirm Order</button>
             </div>

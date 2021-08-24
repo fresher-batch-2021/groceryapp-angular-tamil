@@ -12,22 +12,24 @@ export class OrderService {
 
   url = "https://8ca8138b-1aac-430a-8325-3a686242a515-bluemix.cloudantnosqldb.appdomain.cloud/grocerystoreapp_order";
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  
-  placeOrder(orderData : any) 
-  {
+
+  placeOrder(orderData: any) {
     return this.http.post(this.url, orderData, { headers: { Authorization: this.basicAuth } })
   }
 
-  OrderList()
-  {
-    return this.http.get(this.url+"/_all_docs?include_docs=true", { headers: { Authorization: this.basicAuth } })
+  OrderList() {
+    return this.http.get(this.url + "/_all_docs?include_docs=true", { headers: { Authorization: this.basicAuth } })
   }
 
-  updateStatus(order : any)
-  {
-    return this.http.put(this.url+"/"+order._id+"?rev="+order._rev, order, { headers: { Authorization: this.basicAuth } })
-  }
+  getMyOrders(query : any) {
  
+    return this.http.post(this.url + "/_find", query, { headers: { Authorization: this.basicAuth } })
+  }
+
+  updateStatus(order: any) {
+    return this.http.put(this.url + "/" + order._id + "?rev=" + order._rev, order, { headers: { Authorization: this.basicAuth } })
+  }
+
 }

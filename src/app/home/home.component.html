@@ -1,31 +1,7 @@
 <app-image-gallery></app-image-gallery>
 
 
-<div class="container">
-
-
-    <div *ngFor="let category of categories | keyvalue">
-
-        <h3 class="text-center">{{category.key}}</h3>
-        <div class="text-right">
-            <button class="btn btn-primary btn-sm" role="button" (click)="view(category.key)">view all</button>
-        </div>
-
-        <div class="row">
-
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4" *ngFor="let productItem of getProductItems(category.key)">
-                <div><img src="assets/images/{{productItem.imageUrl}}" width="150px" height="150px">
-                    <figcaption>{{productItem.name}}</figcaption>
-                    <p>{{productItem.unit}} {{productItem.type}} - <i class="fas fa-rupee-sign" aria-hidden="true"></i>
-                        {{productItem.price}}</p>
-                    <a (click)="addCart(productItem._id, productItem.name, productItem.unit, productItem.type, productItem.price)"
-                        class="add">Add</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+<app-products [noOfProducts]="6"></app-products>
 
 
 <div class="container">

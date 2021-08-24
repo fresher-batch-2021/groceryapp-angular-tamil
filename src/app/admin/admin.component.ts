@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { AdminService } from '../admin.service';
 export class AdminComponent implements OnInit {
 
   adminloginForm: FormGroup;
+  role : any;
+  email : any;
 
   constructor(private fb : FormBuilder,
-    private adminservice : AdminService) {
+    private adminservice : AdminService, private router:Router) {
     this.adminloginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{6,8}')]),
@@ -39,7 +42,8 @@ export class AdminComponent implements OnInit {
           "_rev",
           "name",
           "email",
-          "password"
+          "password",
+          "role"
       ]
   }
     this.adminservice.listOfAdmin(adminLoginObj).subscribe((res : any) => {
@@ -51,9 +55,15 @@ export class AdminComponent implements OnInit {
       }
       else
       {
+        let adminObj = data[0];
+        localStorage.setItem("LOGGED_IN_ADMIN", JSON.stringify(adminObj));
         window.location.href = "/adminPanel";
         alert("Login Successfully");
       }
     })
+  }
+
+  navigate(url:string){
+    this.router.navigateByUrl(url);
   }
 }

@@ -17,9 +17,16 @@ export class CartServiceService {
     return cartItemsStr != null ? JSON.parse(cartItemsStr) : [];
   }
 
-  addItemToCart(itemObj: any) {
-    let cartItems = this.getCartItems();
+  addItemToCart(itemObj: any) {    
+    let cartItems:any = this.getCartItems();
+    let index = cartItems.findIndex((obj:any)=>obj.id == itemObj.id);
+    if(index == -1){
     cartItems.push(itemObj);
+    }
+    else {
+      cartItems[index].unit +=1;
+      cartItems[index].totalPrice = cartItems[index].unit * cartItems[index].price;  
+    }
     localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
 
   }

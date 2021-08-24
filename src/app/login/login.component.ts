@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   email: any;
   password: any;
   remember: any;
+  role : any;
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
           "email": this.loginForm.value.email,
           "password": this.loginForm.value.password
         },
-        "fields": ["_id", "_rev", "name","email", "password"]
+        "fields": ["_id", "_rev", "name","email", "password", "role"]
       }
 
       if (this.loginForm.value.email === null || this.loginForm.value.email.trim() == "") {
@@ -73,7 +74,8 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            localStorage.setItem("emailAddress", this.email);
+            let user = userData[0];                       
+            localStorage.setItem("LOGGED_IN_USER", JSON.stringify(user));
             window.location.href = "/home";
             alert("Login Successfully");
           }

@@ -1,72 +1,45 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { OrderNowComponent } from './order-now/order-now.component';
 import { AboutComponent } from './about/about.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
-import { AdminComponent } from './admin/admin.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { AdminListComponent } from './admin-list/admin-list.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { RemoveProductComponent } from './remove-product/remove-product.component';
-import { PlaceOrdersComponent } from './place-orders/place-orders.component';
-import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
-import { SearchPipe } from './search.pipe';
-import { FruitsComponent } from './fruits/fruits.component';
-import { VegetablesComponent } from './vegetables/vegetables.component';
-import { SpicyChipsComponent } from './spicy-chips/spicy-chips.component';
-import { VegetableOilsComponent } from './vegetable-oils/vegetable-oils.component';
-import { SoftDrinksComponent } from './soft-drinks/soft-drinks.component';
-import { DryFruitsComponent } from './dry-fruits/dry-fruits.component';
-import { CookiesComponent } from './cookies/cookies.component';
+import { AuthModule } from './auth/auth.module';
+import { ProductModule } from './product/product.module';
+import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
+import { OrderModule } from './order/order.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RegisterComponent,
-    LoginComponent,
-    OrderNowComponent,
     AboutComponent,
     HeaderComponent,
     FooterComponent,
     ImageGalleryComponent,
-    AdminComponent,
-    AdminPanelComponent,
-    AdminListComponent,
-    UserListComponent,
-    ProductListComponent,
-    AddProductComponent,
-    RemoveProductComponent,
-    PlaceOrdersComponent,
-    SideNavBarComponent,
-    SearchPipe,
-    FruitsComponent,
-    VegetablesComponent,
-    SpicyChipsComponent,
-    VegetableOilsComponent,
-    SoftDrinksComponent,
-    DryFruitsComponent,
-    CookiesComponent
+   
   ],
   imports: [
     BrowserModule,
+    AuthModule,    
+    AdminModule,
+    ProductModule,
+    UserModule,
+    OrderModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -9,11 +9,21 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   email : any;
-
+  adminEmail : any;
+  adminEmailValue = false;
   emailValue = false;
 
   constructor(private router : Router) 
   {
+    let admin = localStorage.getItem("LOGGED_IN_ADMIN");
+    this.adminEmail = admin != null ? JSON.parse(admin) : [];
+    console.log("adminEmail", this.adminEmail);
+
+    if(this.adminEmail.email != null)
+    {
+      this.adminEmailValue = true;
+      console.log("adminemail", this.adminEmail.email);
+    }
     this.email = localStorage.getItem("emailAddress");
     console.log("email", this.email);
 
@@ -31,6 +41,12 @@ export class HeaderComponent implements OnInit {
   {
     localStorage.removeItem("emailAddress");
     window.location.href = "/login";
+  }
+
+  adminLogOut()
+  {
+    localStorage.removeItem("LOGGED_IN_ADMIN");
+    window.location.href = "/admin";
   }
 
 }

@@ -25,10 +25,32 @@ export class OrderNowComponent implements OnInit {
     this.email = localStorage.getItem("emailAddress");
     console.log("email", this.email);
 
+    this.calculateTotalAmount();
+
+
+  }
+
+  calculateTotalAmount(){
+    this.totalBillAmount = 0;
+    for(let item of this.cartItems){
+      this.totalBillAmount += item.unit * item.price;
+    }
+  
   }
 
   ngOnInit(): void { }
 
+  products:any = [];
+
+  totalBillAmount = 0;
+
+  updatePrice(index:number){
+    console.log('change ' , index);
+    let cartItem = this.cartItems[index];
+    cartItem.totalPrice = cartItem.unit * cartItem.price;
+    this.cartItems[index] = cartItem;
+    this.calculateTotalAmount();
+  }
 
   confirmOrder() {
     if (this.email != null && this.email != "") {
@@ -36,8 +58,9 @@ export class OrderNowComponent implements OnInit {
       let orderData = {
         items: this.cartItems,
         createdBy: this.email,
-        status: "order",
-        date: new Date()
+        status: "ORDER",
+        date: new Date(),
+        totalBillAmount : this.totalBillAmount
       }
       console.log("e", orderData);
 
@@ -45,6 +68,7 @@ export class OrderNowComponent implements OnInit {
         this.service.emptyCart();
         window.location.reload();
       })
+      
 
     }
     else {

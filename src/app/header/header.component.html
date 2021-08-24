@@ -8,23 +8,32 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" id="liname"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="adminEmailValue == false">
         <a class="nav-link" routerLink="/about" id="liname"><i class="fas fa-info-circle" aria-hidden="true"></i> About</a>
       </li>
-      <li class="nav-item" *ngIf = "emailValue === false">
+      <li class="nav-item" *ngIf = "emailValue === false && adminEmailValue == false">
         <a class="nav-link" routerLink="/register" id="liname"><i class="fas fa-user-lock" aria-hidden="true"></i> Register</a>
       </li>
-      <li class="nav-item" *ngIf = "emailValue === false">
+      <li class="nav-item" *ngIf = "emailValue === false && adminEmailValue == false">
         <a class="nav-link" routerLink="/login" id="liname"><i class="fas fa-unlock-alt" aria-hidden="true"></i> Login</a>
       </li>
-      <li class="nav-item" *ngIf = "emailValue === true">
+      <li class="nav-item" *ngIf = "emailValue === true && adminEmailValue == false">
         <a class="nav-link" (click)="logOut()" id="liname"><i class="fas fa-lock" aria-hidden="true"></i> LogOut</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf = "adminEmailValue == false">
         <a class="nav-link" routerLink="/ordernow" id="liname"><i class="fas fa-shopping-basket" aria-hidden="true"></i> Cart</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin" id="liname"><i class="fas fa-user-cog" aria-hidden="true"></i> Admin</a>
+      <li class="nav-item" *ngIf = "emailValue === true && adminEmailValue == false">
+        <a class="nav-link" routerLink="/myOrder" id="liname"><i class="fas fa-shopping-basket" aria-hidden="true"></i> My Order</a>
+      </li>
+      <li class="nav-item" *ngIf = "adminEmailValue == false">
+        <a class="nav-link" routerLink="/admin" id="liname"><i class="fas fa-user-cog" aria-hidden="true"></i> Admin Login</a>
+      </li>
+      <li class="nav-item" *ngIf = "adminEmailValue == true">
+        <a class="nav-link" id="liname">Welcome {{adminEmail.email}}</a>
+      </li>
+      <li class="nav-item" *ngIf = "adminEmailValue == true">
+        <a class="nav-link" (click)="adminLogOut()" routerLink="/admin" id="liname"><i class="fas fa-user-cog" aria-hidden="true"></i> Admin LogOut</a>
       </li>
     </ul>
   </div>
