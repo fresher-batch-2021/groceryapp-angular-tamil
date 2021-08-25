@@ -10,16 +10,14 @@ export class PlaceOrdersComponent implements OnInit {
 
   placeOrderList: any;
 
-  constructor(private orderService : OrderService) 
-  { 
+  constructor(private orderService: OrderService) {
     this.getOrderList();
   }
 
   ngOnInit(): void {
   }
 
-  getOrderList()
-  {
+  getOrderList() {
     this.orderService.OrderList().subscribe((res: any) => {
       let row = res.rows;
       let docs = row.map((obj: any) => obj.doc);
@@ -29,27 +27,32 @@ export class PlaceOrdersComponent implements OnInit {
   }
 
 
-  
-  changeDelivered(order:any) {
+
+  changeDelivered(order: any) {
 
 
     console.log("order :", order);
-    order.status="DELIVERED";
-    
+    order.status = "DELIVERED";
 
-  this.orderService.updateStatus(order).subscribe((res) => {
-    console.log("Delivered Status Changed Successfully", res);
-    document.location.reload();
-  })
+
+    this.orderService.updateStatus(order).subscribe((res) => {
+      console.log("Delivered Status Changed Successfully", res);
+      document.location.reload();
+    })
   }
 
-  changeCancelled(order:any)
-  {
-   order.status="CANCELLED";
+  changeCancelled(order: any) {
+    let cancellationReason = prompt("Enter reason");
+    console.log("cancel Reason", cancellationReason);
+    if (cancellationReason != null && cancellationReason != "" && cancellationReason.trim() != "" && cancellationReason.length > 3) {
+      order.status = "CANCELLED";
 
-  this.orderService.updateStatus(order).subscribe((res) => {
-    console.log("Cancelled Status Changed Successfully", res);
-    document.location.reload();
-  })
+      this.orderService.updateStatus(order).subscribe((res) => {
+        console.log("Cancelled Status Changed Successfully", res);
+        document.location.reload();
+      })
+    }
   }
+
+
 }

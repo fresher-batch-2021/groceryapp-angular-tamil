@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class AdminComponent implements OnInit {
   email : any;
 
   constructor(private fb : FormBuilder,
-    private adminservice : AdminService, private router:Router) {
+    private adminservice : AdminService, private router:Router,
+    private toastr : ToastrService) {
     this.adminloginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{6,8}')]),
@@ -51,14 +53,18 @@ export class AdminComponent implements OnInit {
       let data = res.docs;
       if(data.length === 0)
       {
-        alert("Invalid Email or Password");
+        // alert("Invalid Email or Password");
+        this.toastr.error("Invalid Email or Password");
       }
       else
       {
         let adminObj = data[0];
         localStorage.setItem("LOGGED_IN_ADMIN", JSON.stringify(adminObj));
         window.location.href = "/adminPanel";
-        alert("Login Successfully");
+        this.toastr.success("Login Successfully");
+
+        // this.router.navigate(["/adminPanel"]);
+        // alert("Login Successfully");
       }
     })
   }

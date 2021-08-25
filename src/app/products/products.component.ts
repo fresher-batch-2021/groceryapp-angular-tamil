@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 import { ProductsService } from '../products.service';
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -29,13 +30,15 @@ export class ProductsComponent implements OnInit {
   constructor(private router: Router,
     private cartService: CartServiceService,
     private http: HttpClient,
-    private productService: ProductsService) 
+    private productService: ProductsService,
+    private toastr : ToastrService) 
   { 
     console.log("Products Constructor");
     this.getProduct();
   }
 
   ngOnInit(): void {
+    this.itemslist = this.cartService.getCartItems();
   }
 
 
@@ -88,22 +91,28 @@ export class ProductsComponent implements OnInit {
 
 
 
-    alert("product added");
+    // alert("product added");
+    this.toastr.success("Product Added");
     this.totalPrice = qty * price;
     var itemObj = { "id": id, "productName": productName, "unit": qty, "price": price, "totalPrice": this.totalPrice };
     console.log(itemObj);
-    this.itemslist = itemObj;
-    console.log("itemlist", this.itemslist);
+    // this.itemslist = itemObj;
+    // console.log("itemlist", this.itemslist);
 
     // const cartItems = JSON.parse(localStorage.getItem("CART_ITEMS")) || [];
     this.cartService.addItemToCart(itemObj);
 
-
+    this.itemslist = this.cartService.getCartItems();
 
   }
 
   view(viewCategory : any)
   {
     this.router.navigateByUrl("productcategory/" + viewCategory);
+  }
+
+  isItemAdded(productName:string){
+    
+    return this.itemslist.find( (obj:any)=>obj.productName == productName) !=null;
   }
 }

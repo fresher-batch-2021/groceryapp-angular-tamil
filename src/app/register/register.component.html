@@ -19,7 +19,7 @@
 
     <div class="form-group">
       <label for="phone">Phone No <sup>*</sup></label>
-      <input formControlName="phoneno" class="form-control" type="tel" name="phoneno" id="phoneno" 
+      <input formControlName="phoneno" class="form-control" type="tel" name="phoneno" id="phoneno" pattern="[9876][0-9]{9}" 
         placeholder="Enter phone no" maxlength="10" minlength="10" autocomplete="off" required>
       <span *ngIf="registerForm.controls.phoneno.errors && registerForm.controls.phoneno.dirty" class="danger"
         padding>Phone No is not valid.</span>
@@ -42,8 +42,8 @@
     </div>
 
     <div class="text-center log">
-      <a routerLink="/login">Login</a> &nbsp; <button class="btn" type="submit" [disabled]="!registerForm.valid">Register</button>&nbsp; <a
-        routerLink="/home">Skip</a>
+      <a href="/login" routerLink="/login">Login</a> &nbsp; <button class="btn" type="submit" [disabled]="!registerForm.valid">Register</button>&nbsp; <a
+        routerLink="/home" href="/home">Skip</a>
     </div>
 
   </form>

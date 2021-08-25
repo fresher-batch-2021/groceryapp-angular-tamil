@@ -10,13 +10,15 @@ import { ProductsService } from '../products.service';
 export class MyOrderComponent implements OnInit {
 
   email : any;
+  userEmail : any;
 
   placeOrderList : any;
 
   constructor(private orderService : OrderService) 
   { 
-    this.email = localStorage.getItem("emailAddress");
-    console.log("email", this.email);
+    this.email = localStorage.getItem("LOGGED_IN_USER");
+    this.userEmail = this.email != null ? JSON.parse(this.email) : [];
+    console.log("email", this.userEmail.email);
     this.getAllProduct();
   }
 
@@ -28,7 +30,7 @@ export class MyOrderComponent implements OnInit {
 
     let query = {
       selector: {
-        createdBy: this.email
+        createdBy: this.userEmail.email
       }
     }
 

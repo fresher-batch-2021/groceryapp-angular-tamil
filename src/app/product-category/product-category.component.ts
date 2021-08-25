@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 import { ProductsService } from '../products.service';
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-category',
@@ -25,7 +26,8 @@ export class ProductCategoryComponent implements OnInit {
 
   constructor(private route:ActivatedRoute ,
     private productService : ProductsService,
-    private cartService : CartServiceService) 
+    private cartService : CartServiceService,
+    private toastr : ToastrService) 
     { 
       this.viewCategory = this.route.snapshot.params["category"];
       console.log("view", this.viewCategory);
@@ -83,7 +85,8 @@ export class ProductCategoryComponent implements OnInit {
 
 
 
-    alert("product added");
+    // alert("product added");
+    this.toastr.success("Product Added");
     this.totalPrice = qty * price;
     var itemObj = { "id": id, "productName": productName, "unit": qty, "price": price, "totalPrice": this.totalPrice };
     console.log(itemObj);

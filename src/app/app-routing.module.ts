@@ -8,6 +8,7 @@ import { AdminGuard } from './admin.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
+import { ChartComponent } from './chart/chart.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -83,6 +84,9 @@ const routes: Routes = [
   },
   {
     path: "myOrder", component: MyOrderComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: "chart", component: ChartComponent
   }
   
 ];

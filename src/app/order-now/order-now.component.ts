@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartServiceService } from '../cart-service.service';
 import { OrderService } from '../order.service';
 import { ProductsService } from '../products.service';
@@ -13,17 +13,19 @@ export class OrderNowComponent implements OnInit {
 
   cartItems: any;
 
-  email: string | null;
+  user: any;
 
 
   constructor(private route: ActivatedRoute,
     private service: CartServiceService,
-    private orderService : OrderService) {
+    private orderService : OrderService,
+    private router : Router) {
 
     this.cartItems = this.service.getCartItems();
     console.log("cart", this.cartItems);
-    this.email = localStorage.getItem("emailAddress");
-    console.log("email", this.email);
+    let userEmail = localStorage.getItem("LOGGED_IN_USER");
+    this.user = userEmail != null ? JSON.parse(userEmail) : [];
+    console.log("user.email", this.user.email);
 
     this.calculateTotalAmount();
 
@@ -53,11 +55,11 @@ export class OrderNowComponent implements OnInit {
   }
 
   confirmOrder() {
-    if (this.email != null && this.email != "") {
+    if (this.user.email != null && this.user.email != "") {
       alert("Order Add Successfully");
       let orderData = {
         items: this.cartItems,
-        createdBy: this.email,
+        createdBy: this.user.email,
         status: "ORDER",
         date: new Date(),
         totalBillAmount : this.totalBillAmount
@@ -73,7 +75,8 @@ export class OrderNowComponent implements OnInit {
     }
     else {
       alert("please login or register");
-      window.location.href = "/login";
+      // window.location.href = "/login";
+      this.router.navigate(["/login"]);
     }
   }
 
@@ -86,5 +89,10 @@ export class OrderNowComponent implements OnInit {
   {
     this.service.removeItem(product);
     document.location.reload();
+  }
+
+  orderMore()
+  {
+    this.router.navigate(["/home"]);
   }
 }

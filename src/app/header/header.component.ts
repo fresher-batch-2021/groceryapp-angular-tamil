@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  email : any;
+  userEmail : any;
+
   adminEmail : any;
   adminEmailValue = false;
   emailValue = false;
@@ -24,10 +25,11 @@ export class HeaderComponent implements OnInit {
       this.adminEmailValue = true;
       console.log("adminemail", this.adminEmail.email);
     }
-    this.email = localStorage.getItem("emailAddress");
-    console.log("email", this.email);
+    let user = localStorage.getItem("LOGGED_IN_USER");
+    this.userEmail = user != null ? JSON.parse(user) : [];
+    console.log("email", this.userEmail.email);
 
-    if(this.email != null)
+    if(this.userEmail.email != null)
     {
       this.emailValue = true;
       console.log("emailvalue", this.emailValue);
@@ -39,7 +41,7 @@ export class HeaderComponent implements OnInit {
 
   logOut()
   {
-    localStorage.removeItem("emailAddress");
+    localStorage.removeItem("LOGGED_IN_USER");
     window.location.href = "/login";
   }
 

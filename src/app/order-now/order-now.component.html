@@ -3,7 +3,7 @@
     <div>
         <h3 class="text-center">Order Now</h3>
                 <div class="text-center">
-                    <label id="email">{{email}}</label>
+                    <label id="email">{{this.user.email}}</label>
                 </div>
 
             <table border="1" aria-describedby="mydesc">
@@ -36,7 +36,7 @@
                 </tfoot>
             </table>
             <div class="text-center">
-                <button class="btn btn-secondary" type="button" routerLink="/home">Order More</button>
+                <button class="btn btn-secondary" type="button" (click)="orderMore()" routerLink="/home">Order More</button>
                 <button class="btn btn-danger" type="button" (click)="emptyCart()">Empty Cart</button>
                 <button class="btn btn-primary" type="button" (click)="confirmOrder()">Confirm Order</button>
             </div>
