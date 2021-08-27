@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyOrderComponent } from '../my-order/my-order.component';
 import { OrderNowComponent } from '../order-now/order-now.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlaceOrdersComponent } from '../place-orders/place-orders.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -17,7 +19,10 @@ import { PlaceOrdersComponent } from '../place-orders/place-orders.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    RouterModule
   ]
 })
 export class OrderModule { }

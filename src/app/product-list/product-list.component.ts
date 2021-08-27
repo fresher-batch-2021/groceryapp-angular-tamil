@@ -14,6 +14,8 @@ export class ProductListComponent implements OnInit {
 
   selectedCategory: any;
 
+  ascProductList: any;
+
   constructor(private productService : ProductsService) 
   { 
     this.getAllProducts();
@@ -32,6 +34,8 @@ export class ProductListComponent implements OnInit {
       
       this.categories = _.uniq(this.productList.map((obj:any)=>obj.category));
       console.log("productList", this.productList);
+      this.ascProductList = _.orderBy(this.productList, ['category'], ['asc']);
+      console.log("Ascending Product List  :", this.ascProductList);
     })
   }
   

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CartServiceService } from '../cart-service.service';
 import { OrderService } from '../order.service';
 import { ProductsService } from '../products.service';
@@ -19,7 +20,8 @@ export class OrderNowComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private service: CartServiceService,
     private orderService : OrderService,
-    private router : Router) {
+    private router : Router,
+    private toastr : ToastrService) {
 
     this.cartItems = this.service.getCartItems();
     console.log("cart", this.cartItems);
@@ -56,7 +58,8 @@ export class OrderNowComponent implements OnInit {
 
   confirmOrder() {
     if (this.user.email != null && this.user.email != "") {
-      alert("Order Add Successfully");
+      // alert("Order Add Successfully");
+      this.toastr.success("Order Added Successfully");
       let orderData = {
         items: this.cartItems,
         createdBy: this.user.email,
@@ -74,7 +77,8 @@ export class OrderNowComponent implements OnInit {
 
     }
     else {
-      alert("please login or register");
+      // alert("please login or register");
+      this.toastr.error("Please Login or Register");
       // window.location.href = "/login";
       this.router.navigate(["/login"]);
     }

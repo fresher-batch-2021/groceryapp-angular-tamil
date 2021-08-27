@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-remove-product',
@@ -9,6 +10,9 @@ import { ProductsService } from '../products.service';
 export class RemoveProductComponent implements OnInit {
 
   productList: any;
+  ascProductList: any;
+  selectedCategory: any;
+
 
   constructor(private productService : ProductsService) 
   { 
@@ -24,6 +28,8 @@ export class RemoveProductComponent implements OnInit {
       let data = res.rows;
       this.productList = data.map((obj: any) => obj.doc)
       console.log("productList", this.productList);
+      this.ascProductList = _.orderBy(this.productList, ['category'], ['asc']);
+      console.log("Ascending Product List :", this.ascProductList);
     })
   }
 

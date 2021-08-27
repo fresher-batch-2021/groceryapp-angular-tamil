@@ -9,6 +9,7 @@
             <th scope="col">Ordered By</th>
             <th scope="col">Ordered Date</th>
             <th scope="col">Bill Amount</th>
+            <th scope="col">Comments</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
         </thead>
@@ -38,6 +39,7 @@
             <td>{{place.createdBy}}</td>
             <td>{{place.date | date: "dd-MMM-yyyy"}}</td>
             <td>Rs. {{place.totalBillAmount}}</td>
+            <td>{{place.comments}}</td>
             <td>{{place.status}}</td>
             <td><a *ngIf="place.status=='ORDER'" href="/myOrder" (click)="changeCancelled(place)">Cancel</a></td>
         </tbody>

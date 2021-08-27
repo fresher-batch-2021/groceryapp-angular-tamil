@@ -44,15 +44,22 @@ export class RegisterComponent implements OnInit {
     console.log("email", this.registerForm.value.email);
     console.log("password", this.registerForm.value.password);
 
-    for(let userData of this.userDataList) 
-    {
-      if(userData.email === this.registerForm.value.email) {
-        // alert("Already register this email");
-        this.toastr.error("Already register this Email");
-        break;
-      }
-      else 
-       {
+
+    let userList = {
+      "selector": {
+        "email": this.registerForm.value.email,        
+        "role": "user"
+      },
+      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+    }
+    this.userService.userList(userList).subscribe((res: any) => {
+      // console.log("res", res.docs);
+      this.userDataList = res.docs;
+      console.log("datalist", this.userDataList);
+      console.log("datalist Length", this.userDataList.length);
+
+      if (this.userDataList.length === 0) {
+
         var registerObj = {
           name: this.registerForm.value.username,
           mobileNo: this.registerForm.value.phoneno,
@@ -68,28 +75,33 @@ export class RegisterComponent implements OnInit {
           // this.router.navigate(["/login"]);
           this.toastr.success("Registration  Successfully");
         }, err => {
-          // alert("Register Error");
           this.toastr.error("Registration Error");
         })
+
       }
-    }
+      else
+      {
+        this.toastr.error("Email Id Already Exists");
+      }
+
+    }, err => {
+      console.log("Error", err);
+    })
 
   }
 
   userList() {
-    let userList = {
-      "selector": {
-        "role": "user"
-      },
-      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
-    }
+    // let userList = {
+    //   "selector": {
+    //     "role": "user"
+    //   },
+    //   "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+    // }
+    // this.userService.userList(userList).subscribe((res: any) => {
+    //   // console.log("res", res.docs);
+    //   this.userDataList = res.docs;
+    //   console.log("datalist", this.userDataList);
 
-
-    this.userService.userList(userList).subscribe((res: any) => {
-      // console.log("res", res.docs);
-      this.userDataList = res.docs;
-      console.log("datalist", this.userDataList);
-
-    })
+    // })
   }
 }

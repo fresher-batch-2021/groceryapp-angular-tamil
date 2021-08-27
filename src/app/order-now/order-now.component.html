@@ -3,7 +3,7 @@
     <div>
         <h3 class="text-center">Order Now</h3>
                 <div class="text-center">
-                    <label id="email">{{this.user.email}}</label>
+                    <label id="email"> <i class="fas fa-user-tie"></i> &nbsp; <b><em>{{this.user.email}}</em></b></label>
                 </div>
 
             <table border="1" aria-describedby="mydesc">
@@ -36,9 +36,9 @@
                 </tfoot>
             </table>
             <div class="text-center">
-                <button class="btn btn-secondary" type="button" (click)="orderMore()" routerLink="/home">Order More</button>
-                <button class="btn btn-danger" type="button" (click)="emptyCart()">Empty Cart</button>
-                <button class="btn btn-primary" type="button" (click)="confirmOrder()">Confirm Order</button>
+                <button class="btn btn-secondary" type="button" (click)="orderMore()" routerLink="/home"> <i class="fas fa-backward"></i> Order More</button>
+                <button class="btn btn-danger" type="button" (click)="emptyCart()"> <i class="fas fa-trash"></i> Empty Cart</button>
+                <button class="btn btn-primary" type="button" (click)="confirmOrder()"> <i class="fas fa-check-circle"></i> Confirm Order</button>
             </div>
            
         </div>

@@ -17,7 +17,7 @@
                     <p>{{productItem.unit}} {{productItem.type}} - <i class="fas fa-rupee-sign" aria-hidden="true"></i>
                         {{productItem.price}}</p>
                     <button type="button" (click)="addCart(productItem._id, productItem.name, productItem.unit, productItem.type, productItem.price)"
-                        class="add" [class.selected-item] = "isItemAdded(productItem.name)" 
+                        class="add btn btn-md btn-block" [class.selected-item] = "isItemAdded(productItem.name)" 
                         [disabled]="isItemAdded(productItem.name)">{{isItemAdded(productItem.name)?"Added":"Add"}}</button>
                 </div>
             </div>

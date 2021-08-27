@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
+import * as _ from 'lodash';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-place-orders',
@@ -9,13 +11,23 @@ import { OrderService } from '../order.service';
 export class PlaceOrdersComponent implements OnInit {
 
   placeOrderList: any;
+  recentOrderList: any;
 
-  constructor(private orderService: OrderService) {
+  statusFilterForm: any;
+  filter : any;
+
+  constructor(private orderService: OrderService,
+    private fb: FormBuilder) {
+    this.statusFilterForm = this.fb.group({
+      status: new FormControl("ALL", Validators.required)
+    })
     this.getOrderList();
   }
 
   ngOnInit(): void {
   }
+
+  searchOrderResults:any;
 
   getOrderList() {
     this.orderService.OrderList().subscribe((res: any) => {
@@ -23,6 +35,9 @@ export class PlaceOrdersComponent implements OnInit {
       let docs = row.map((obj: any) => obj.doc);
       this.placeOrderList = docs;
       console.log("placeOrderList", this.placeOrderList);
+      this.recentOrderList = _.orderBy(this.placeOrderList, ["date"], ["desc"]);
+      console.log("descending List :", this.recentOrderList);
+      this.searchOrderResults = this.recentOrderList;
     })
   }
 
@@ -33,6 +48,7 @@ export class PlaceOrdersComponent implements OnInit {
 
     console.log("order :", order);
     order.status = "DELIVERED";
+    order.deliveredDate = new Date().toJSON();
 
 
     this.orderService.updateStatus(order).subscribe((res) => {
@@ -46,6 +62,8 @@ export class PlaceOrdersComponent implements OnInit {
     console.log("cancel Reason", cancellationReason);
     if (cancellationReason != null && cancellationReason != "" && cancellationReason.trim() != "" && cancellationReason.length > 3) {
       order.status = "CANCELLED";
+      order.comments = cancellationReason;
+      order.cancelledDate = new Date().toJSON();
 
       this.orderService.updateStatus(order).subscribe((res) => {
         console.log("Cancelled Status Changed Successfully", res);
@@ -55,4 +73,14 @@ export class PlaceOrdersComponent implements OnInit {
   }
 
 
+  statusFilter() {
+    
+    this.filter = this.statusFilterForm.value.status;
+    
+      this.searchOrderResults =  this.filter =='ALL'? this.recentOrderList: this.recentOrderList.filter( (obj:any)=> obj.status == this.filter);
+    
+   
+    console.log("status Filter :", this.filter);
+
+  }
 }

@@ -21,7 +21,7 @@
         <th scope="col">imageUrl</th>
         <th scope="col">Category</th>
     </thead>
-    <tbody *ngFor="let list of (productList | category:selectedCategory); let i=index">       
+    <tbody *ngFor="let list of (ascProductList | category:selectedCategory); let i=index">       
         <td>{{i+1}}</td>   
         <td>{{list.name}}</td>
         <td>{{list.price}}</td>

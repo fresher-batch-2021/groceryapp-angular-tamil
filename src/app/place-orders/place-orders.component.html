@@ -1,7 +1,28 @@
 <h3 class="text-center mb-5">Check Order Status</h3>
+
+<form [formGroup]="statusFilterForm">
+
+<div class="text-center">
+
+    <input type="radio"  value="ALL" [checked]="true" name="status"  id="status" formControlName="status" (change)="statusFilter()"> &nbsp;
+    <label for="delivered">All</label>
+
+    <input type="radio"  value="DELIVERED" name="status" class="ml-5" id="status" formControlName="status" (change)="statusFilter()"> &nbsp;
+    <label for="delivered">Delivered</label>
+
+    <input type="radio"  value="CANCELLED" name="status"  class="ml-5" id="status" formControlName="status" (change)="statusFilter()"> &nbsp;
+    <label for="delivered">Cancelled</label>
+
+    <input type="radio"  value="ORDER" name="status"  class="ml-5" id="status" formControlName="status" (change)="statusFilter()"> &nbsp;
+    <label for="delivered">Order</label>
+</div>
+
+</form>
+
    <div >
     <table border="1" aria-describedby="mydesc"> 
         <thead>
+         <tr>
             <th scope="col">S.no</th>
             <th scope="col">Items
                
@@ -11,8 +32,10 @@
             <th scope="col">Bill Amount</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
+         </tr>
         </thead>
-        <tbody *ngFor="let place of placeOrderList; let i=index;">
+        <tbody *ngFor="let place of searchOrderResults; let i=index;">
+           <tr>
             <td>{{i+1}}</td>
             <td>
                 <ul class="text-center unorderedlist">
@@ -40,6 +63,7 @@
             <td>Rs. {{place.totalBillAmount}}</td>
             <td>{{place.status}}</td>
             <td><a *ngIf="place.status == 'ORDER'" href="/adminPanel/placeOrders" (click)="changeDelivered(place)">Deliver</a> &nbsp; <a *ngIf="place.status == 'ORDER'" href="/adminPanel/placeOrders" (click)="changeCancelled(place)" >Cancel</a></td>
+           </tr>
         </tbody>
     </table>
    </div>

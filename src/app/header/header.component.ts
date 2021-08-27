@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("active route", this.router.url);
   }
 
   logOut()

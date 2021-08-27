@@ -1,4 +1,11 @@
 <h3 class="text-center mb-5">Product Remove to List</h3>
+
+<div class="text-center mb-5">
+    <input type="text" name="category" id="category" [(ngModel)]="selectedCategory" placeholder="        Search Ex: apple">
+    <!-- <button type="button" >Search</button> -->
+</div>
+
+
 <table border="1" aria-describedby="mydesc">
     <thead>
         <th scope="col">S.no</th>
@@ -8,7 +15,7 @@
         <th scope="col">Category</th>
         <th scope="col">Action</th>
     </thead>
-    <tbody *ngFor="let list of productList; let i=index">
+    <tbody *ngFor="let list of (ascProductList | category:selectedCategory); let i=index">
         <td>{{i+1}}</td>
         <td>{{list.name}}</td>
         <td>{{list.price}}</td>
