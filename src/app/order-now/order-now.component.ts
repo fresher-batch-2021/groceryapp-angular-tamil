@@ -86,13 +86,13 @@ export class OrderNowComponent implements OnInit {
 
   emptyCart() {
     localStorage.removeItem("CART_ITEMS");
-    document.location.reload();
+    this.cartItems = this.service.getCartItems();
   }
 
-  removeItem(product : any)
+  removeItem(index : any)
   {
-    this.service.removeItem(product);
-    document.location.reload();
+    this.service.removeItem(index);
+    this.cartItems = this.service.getCartItems();
   }
 
   orderMore()

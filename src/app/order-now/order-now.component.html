@@ -21,10 +21,10 @@
                     <tr *ngFor="let item of cartItems;let i=index">
                         <td>{{i+1}}</td>
                         <td>{{item.productName}}</td>
-                        <td><input type="number" [(ngModel)]="cartItems[i].unit" (change)="updatePrice(i)"></td>
+                        <td><input type="number" [(ngModel)]="cartItems[i].unit" (change)="updatePrice(i)" min="1" max="100"></td>
                         <td>{{item.price}}</td>
                         <td>{{item.totalPrice}}</td>
-                        <td><a href="ordernow" (click)="removeItem(item.productName)">Delete</a></td>
+                        <td><a href="ordernow" (click)="removeItem(i)">Delete</a></td>
                     </tr>
                    
                     <!-- <tr>
@@ -37,8 +37,8 @@
             </table>
             <div class="text-center">
                 <button class="btn btn-secondary" type="button" (click)="orderMore()" routerLink="/home"> <i class="fas fa-backward"></i> Order More</button>
-                <button class="btn btn-danger" type="button" (click)="emptyCart()"> <i class="fas fa-trash"></i> Empty Cart</button>
-                <button class="btn btn-primary" type="button" (click)="confirmOrder()"> <i class="fas fa-check-circle"></i> Confirm Order</button>
+                <button class="btn btn-danger" type="button" [disabled]="cartItems.length==0" (click)="emptyCart()"> <i class="fas fa-trash"></i> Empty Cart</button>
+                <button class="btn btn-primary" type="button" [disabled]="cartItems.length==0" (click)="confirmOrder()"> <i class="fas fa-check-circle"></i> Confirm Order</button>
             </div>
            
         </div>

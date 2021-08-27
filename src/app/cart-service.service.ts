@@ -37,15 +37,12 @@ export class CartServiceService {
     localStorage.removeItem("CART_ITEMS");
   }
 
-  removeItem(product : any)
+  removeItem(index : any)
   {
     let cartItems = this.getCartItems();
-    let index = cartItems.map((obj : any) => obj.productName == product);
-    console.log("index", index);
-    if(index != -1)
-    {
+    
       cartItems.splice(index, 1);
-    }
+    
     localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
   }
 }
