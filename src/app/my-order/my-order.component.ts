@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
 import { ProductsService } from '../products.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-my-order',
@@ -13,6 +14,7 @@ export class MyOrderComponent implements OnInit {
   userEmail : any;
 
   placeOrderList : any;
+  descPlaceOrderList : any;
 
   constructor(private orderService : OrderService) 
   { 
@@ -39,6 +41,8 @@ export class MyOrderComponent implements OnInit {
       console.log("res", res.docs);
       this.placeOrderList = res.docs;
       console.log("data", this.placeOrderList);
+      this.descPlaceOrderList = _.orderBy(this.placeOrderList, ["date"], ["desc"])
+      console.log("desc", this.descPlaceOrderList);
       // this.placeOrderList = data.map((obj : any) => obj.doc);
       // console.log("docs", this.placeOrderList);
       
@@ -51,11 +55,20 @@ export class MyOrderComponent implements OnInit {
   {
     console.log("cencelled", order.status);
 
+    let userOrderCancelled = prompt("Enter Reason");    
+    alert(userOrderCancelled);
+    if(userOrderCancelled != null && userOrderCancelled != "" && userOrderCancelled.trim() != "" && userOrderCancelled.length > 3)
+    {
     order.status="CANCELLED";
+    order.comments = userOrderCancelled;
+    order.cancelledDate = new Date().toJSON();
+
 
     this.orderService.updateStatus(order).subscribe((res) => {
       console.log("Cancelled Status Changed Successfully", res);
       document.location.reload();
     })
+    }
+
   }
 }

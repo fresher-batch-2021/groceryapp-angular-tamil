@@ -48,6 +48,7 @@ export class PlaceOrdersComponent implements OnInit {
 
     console.log("order :", order);
     order.status = "DELIVERED";
+    order.comments = "Thank you for shopping...";
     order.deliveredDate = new Date().toJSON();
 
 

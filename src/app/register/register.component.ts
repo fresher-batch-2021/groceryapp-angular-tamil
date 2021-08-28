@@ -65,7 +65,8 @@ export class RegisterComponent implements OnInit {
           mobileNo: this.registerForm.value.phoneno,
           email: this.registerForm.value.email,
           password: this.registerForm.value.password,
-          role: "user"
+          role: "user",
+          registerDate : new Date()
         }
         console.log("registerObj", registerObj);
 

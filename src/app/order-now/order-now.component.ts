@@ -71,7 +71,8 @@ export class OrderNowComponent implements OnInit {
 
       this.orderService.placeOrder(orderData).subscribe(res => {
         this.service.emptyCart();
-        window.location.reload();
+        this.router.navigate(["/myOrder"]);
+        // window.location.reload();
       })
       
 

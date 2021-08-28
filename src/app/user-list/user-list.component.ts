@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
       "selector": {
         "role": "user"
       },
-      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password", "registerDate"]
     }
 
 

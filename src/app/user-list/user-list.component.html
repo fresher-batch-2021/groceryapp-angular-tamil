@@ -5,11 +5,13 @@
         <th scope="col">User Name</th>
         <th scope="col">Mobile Number</th>
         <th scope="col">Email Address</th>
+        <th scope="col">Register Date</th>
     </thead>
     <tbody *ngFor = "let users of userDataList; let i = index">
         <td>{{i+1}}</td>
         <td>{{users.name}}</td>
         <td>{{users.mobileNo}}</td>
         <td>{{users.email}}</td>
+        <td>{{users.registerDate | date : "dd-MMM-yyyy hh:mm:ss a"}}</td>
     </tbody>
 </table>
