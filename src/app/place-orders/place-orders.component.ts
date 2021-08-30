@@ -21,10 +21,10 @@ export class PlaceOrdersComponent implements OnInit {
     this.statusFilterForm = this.fb.group({
       status: new FormControl("ALL", Validators.required)
     })
-    this.getOrderList();
   }
 
   ngOnInit(): void {
+    this.getOrderList();
   }
 
   searchOrderResults: any;

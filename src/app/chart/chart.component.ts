@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Color, Label, MultiDataSet } from 'ng2-charts';
+import { Component } from '@angular/core';
+import { ChartType } from 'chart.js';
+import { Label, MultiDataSet } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
 
 
   doughnutChartLabels: Label[] = ['BMW', 'Ford', 'Tesla', 'Tata'];

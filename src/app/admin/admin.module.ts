@@ -5,8 +5,6 @@ import { AdminListComponent } from '../admin-list/admin-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from '../side-nav-bar/side-nav-bar.component';
-import { AppRoutingModule } from '../app-routing.module';
-import { PlaceOrdersComponent } from '../place-orders/place-orders.component';
 import { RouterModule } from '@angular/router';
 
 

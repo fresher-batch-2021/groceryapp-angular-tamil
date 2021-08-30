@@ -26,6 +26,7 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("Form Value", this.addProductForm.value);
   }
 
   addProduct() {

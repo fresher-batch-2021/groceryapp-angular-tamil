@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("Form Value", this.adminloginForm.value);
   }
 
 

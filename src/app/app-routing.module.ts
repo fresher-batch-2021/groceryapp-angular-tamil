@@ -6,7 +6,6 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminGuard } from './admin.guard';
 import { AdminComponent } from './admin/admin.component';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { ChartComponent } from './chart/chart.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,8 +19,6 @@ import { ProductCategoryComponent } from './product-category/product-category.co
 import { ProductListComponent } from './product-list/product-list.component';
 import { RegisterComponent } from './register/register.component';
 import { RemoveProductComponent } from './remove-product/remove-product.component';
-import { SideNavBarComponent } from './side-nav-bar/side-nav-bar.component';
-
 import { UserListComponent } from './user-list/user-list.component';
 
 

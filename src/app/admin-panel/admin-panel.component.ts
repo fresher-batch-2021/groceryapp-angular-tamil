@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -6,18 +6,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.css']
 })
-export class AdminPanelComponent implements OnInit {
-
-  
-  constructor() {}
-
-  ngOnInit(): void { }
-
-
-
-
-
-
+export class AdminPanelComponent {
 
 
 

@@ -21,10 +21,10 @@ export class MyOrderComponent implements OnInit {
     this.email = localStorage.getItem("LOGGED_IN_USER");
     this.userEmail = this.email != null ? JSON.parse(this.email) : [];
     console.log("email", this.userEmail.email);
-    this.getAllProduct();
   }
 
   ngOnInit(): void {
+    this.getAllProduct();
   }
 
   getAllProduct()
