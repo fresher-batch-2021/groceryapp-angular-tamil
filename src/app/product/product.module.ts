@@ -8,6 +8,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductCategoryComponent } from '../product-category/product-category.component';
 import { ProductsComponent } from '../products/products.component';
 import { RemoveProductComponent } from '../remove-product/remove-product.component';
+import { ProductRoutingModule } from './product-routing.module';
 
 
 
@@ -27,11 +28,13 @@ import { RemoveProductComponent } from '../remove-product/remove-product.compone
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ProductRoutingModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   exports:[
-    ProductsComponent
+    ProductsComponent,
+    ProductCategoryComponent
   ]
 })
 export class ProductModule { }

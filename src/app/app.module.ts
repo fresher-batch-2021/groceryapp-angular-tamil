@@ -5,35 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
-import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { ChartComponent } from './chart/chart.component';
-import { ChartsModule } from 'ng2-charts';
+import { ThemeModule } from './theme/theme.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    HeaderComponent,
-    FooterComponent,
     ImageGalleryComponent,
-    ChartComponent,
 
   ],
   imports: [
     BrowserModule,
-    AuthModule,
-    AdminModule,
+    // AuthModule,
+    // AdminModule,
+    ThemeModule,
     ProductModule,
     UserModule,
     OrderModule,
@@ -41,6 +35,7 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    
 
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -48,7 +43,6 @@ import { ChartsModule } from 'ng2-charts';
       preventDuplicates: true,
       timeOut: 2000,
     }),
-    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

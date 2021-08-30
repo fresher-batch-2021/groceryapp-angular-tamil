@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
       else
       {
         alert("you are not authorized to access this page");
-        this.router.navigate(["/login"]);        
+        this.router.navigate(["/auth/login"]);        
         return false;        
       }
 

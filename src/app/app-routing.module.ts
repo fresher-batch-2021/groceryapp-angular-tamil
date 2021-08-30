@@ -1,25 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { AddProductComponent } from './add-product/add-product.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminGuard } from './admin.guard';
-import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
-import { ChartComponent } from './chart/chart.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { MyOrderComponent } from './my-order/my-order.component';
 import { OrderNowComponent } from './order-now/order-now.component';
 import { PlaceOrdersComponent } from './place-orders/place-orders.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { RegisterComponent } from './register/register.component';
-import { RemoveProductComponent } from './remove-product/remove-product.component';
-import { UserListComponent } from './user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -32,59 +22,34 @@ const routes: Routes = [
   {
     path: "about", component: AboutComponent,
   },
-  {
-    path: "register", component: RegisterComponent,
-  },
-  {
-    path: "login", component: LoginComponent,
-  },
+ 
   {
     path: "ordernow", component: OrderNowComponent,
   },
+ 
+ 
   {
-    path: "header", component: HeaderComponent,
-  },
-  {
-    path: "footer", component: FooterComponent,
-  },
-  {
-    path: "admin", component: AdminComponent,
-  },
-  {
-    path: "adminPanel", component: AdminPanelComponent, canActivate: [AdminGuard] ,children: [
-      
-      {
-        path: "", redirectTo: "adminList", pathMatch: "full"
-      },
-      {
-        path: "adminList", component: AdminListComponent,
-      },
-      {
-        path: "userList", component: UserListComponent
-      },
-      {
-        path: "productList", component: ProductListComponent
-      },
-      {
-        path: "addProduct", component: AddProductComponent
-      },
-      {
-        path: "removeProduct", component: RemoveProductComponent
-      },
-      {
-        path: "placeOrders", component: PlaceOrdersComponent
-      }
-    ]
+    path:'auth',
+    loadChildren: () => import('../app/auth/auth.module').then(m => m.AuthModule)
   }, 
   {
     path: "productcategory/:category", component: ProductCategoryComponent
-  },
+},
+
+  {
+    path:'admin',
+    loadChildren: () => import('../app/admin/admin.module').then(m => m.AdminModule)
+  }, 
+
+
+  {
+    path: "adminPanel",  
+    loadChildren: () => import('../app/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AdminGuard] 
+  }, 
   {
     path: "myOrder", component: MyOrderComponent, canActivate: [AuthGuard]
   },
-  {
-    path: "chart", component: ChartComponent
-  }
   
 ];
 

@@ -43,13 +43,13 @@ export class HeaderComponent implements OnInit {
   logOut()
   {
     localStorage.removeItem("LOGGED_IN_USER");
-    window.location.href = "/login";
+    window.location.href = "/auth/login";
   }
 
   adminLogOut()
   {
     localStorage.removeItem("LOGGED_IN_ADMIN");
-    window.location.href = "/admin";
+    window.location.href = "/auth/admin";
   }
 
 }

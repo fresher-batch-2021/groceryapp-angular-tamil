@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from '../side-nav-bar/side-nav-bar.component';
 import { RouterModule } from '@angular/router';
+import { AdminRoutingModule } from './admin-routing.module';
 
 
 
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AdminRoutingModule
     
 
   ],

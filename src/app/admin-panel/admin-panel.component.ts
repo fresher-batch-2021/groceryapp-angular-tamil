@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AdminPanelComponent {
 
+  constructor(){
+    console.log("AdminPanelComponent")
+  }
 
 
 }
