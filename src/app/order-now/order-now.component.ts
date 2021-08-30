@@ -19,9 +19,9 @@ export class OrderNowComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private service: CartServiceService,
-    private orderService : OrderService,
-    private router : Router,
-    private toastr : ToastrService) {
+    private orderService: OrderService,
+    private router: Router,
+    private toastr: ToastrService) {
 
     this.cartItems = this.service.getCartItems();
     console.log("cart", this.cartItems);
@@ -30,26 +30,24 @@ export class OrderNowComponent implements OnInit {
     console.log("user.email", this.user.email);
 
     this.calculateTotalAmount();
-
-
   }
 
-  calculateTotalAmount(){
+  calculateTotalAmount() {
     this.totalBillAmount = 0;
-    for(let item of this.cartItems){
+    for (let item of this.cartItems) {
       this.totalBillAmount += item.unit * item.price;
     }
-  
+
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
-  products:any = [];
+  products: any = [];
 
   totalBillAmount = 0;
 
-  updatePrice(index:number){
-    console.log('change ' , index);
+  updatePrice(index: number) {
+    console.log('change ', index);
     let cartItem = this.cartItems[index];
     cartItem.totalPrice = cartItem.unit * cartItem.price;
     this.cartItems[index] = cartItem;
@@ -58,29 +56,25 @@ export class OrderNowComponent implements OnInit {
 
   confirmOrder() {
     if (this.user.email != null && this.user.email != "") {
-      // alert("Order Add Successfully");
       this.toastr.success("Order Added Successfully");
       let orderData = {
         items: this.cartItems,
         createdBy: this.user.email,
         status: "ORDER",
         date: new Date(),
-        totalBillAmount : this.totalBillAmount
+        totalBillAmount: this.totalBillAmount
       }
       console.log("e", orderData);
 
       this.orderService.placeOrder(orderData).subscribe(res => {
         this.service.emptyCart();
         this.router.navigate(["/myOrder"]);
-        // window.location.reload();
       })
-      
+
 
     }
     else {
-      // alert("please login or register");
       this.toastr.error("Please Login or Register");
-      // window.location.href = "/login";
       this.router.navigate(["/login"]);
     }
   }
@@ -90,14 +84,12 @@ export class OrderNowComponent implements OnInit {
     this.cartItems = this.service.getCartItems();
   }
 
-  removeItem(index : any)
-  {
+  removeItem(index: any) {
     this.service.removeItem(index);
     this.cartItems = this.service.getCartItems();
   }
 
-  orderMore()
-  {
+  orderMore() {
     this.router.navigate(["/home"]);
   }
 }

@@ -42,10 +42,7 @@ export class MyOrderComponent implements OnInit {
       this.placeOrderList = res.docs;
       console.log("data", this.placeOrderList);
       this.descPlaceOrderList = _.orderBy(this.placeOrderList, ["date"], ["desc"])
-      console.log("desc", this.descPlaceOrderList);
-      // this.placeOrderList = data.map((obj : any) => obj.doc);
-      // console.log("docs", this.placeOrderList);
-      
+      console.log("desc", this.descPlaceOrderList);    
     }, err => {
       console.log("err", err);
     })
@@ -62,7 +59,6 @@ export class MyOrderComponent implements OnInit {
     order.status="CANCELLED";
     order.comments = userOrderCancelled;
     order.cancelledDate = new Date().toJSON();
-
 
     this.orderService.updateStatus(order).subscribe((res) => {
       console.log("Cancelled Status Changed Successfully", res);

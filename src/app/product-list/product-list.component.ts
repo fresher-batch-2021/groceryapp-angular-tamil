@@ -38,9 +38,4 @@ export class ProductListComponent implements OnInit {
       console.log("Ascending Product List  :", this.ascProductList);
     })
   }
-  
-  // option(cate : any)
-  // {
-  //   console.log("cate", cate);
-  // }
 }

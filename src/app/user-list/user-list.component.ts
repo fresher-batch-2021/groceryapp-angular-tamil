@@ -11,8 +11,7 @@ export class UserListComponent implements OnInit {
   userDataList: any;
 
 
-  constructor(private userService : Userservice) 
-  { 
+  constructor(private userService: Userservice) {
     this.userList();
   }
 
@@ -32,7 +31,7 @@ export class UserListComponent implements OnInit {
       this.userDataList = res.docs;
       console.log("datalist", this.userDataList);
     }, err => {
-      alert("Register Error");
+      alert("Something went wrong");
     })
   }
 

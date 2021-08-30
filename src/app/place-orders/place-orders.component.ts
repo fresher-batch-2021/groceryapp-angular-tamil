@@ -14,7 +14,7 @@ export class PlaceOrdersComponent implements OnInit {
   recentOrderList: any;
 
   statusFilterForm: any;
-  filter : any;
+  filter: any;
 
   constructor(private orderService: OrderService,
     private fb: FormBuilder) {
@@ -27,7 +27,7 @@ export class PlaceOrdersComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchOrderResults:any;
+  searchOrderResults: any;
 
   getOrderList() {
     this.orderService.OrderList().subscribe((res: any) => {
@@ -75,12 +75,12 @@ export class PlaceOrdersComponent implements OnInit {
 
 
   statusFilter() {
-    
+
     this.filter = this.statusFilterForm.value.status;
-    
-      this.searchOrderResults =  this.filter =='ALL'? this.recentOrderList: this.recentOrderList.filter( (obj:any)=> obj.status == this.filter);
-    
-   
+
+    this.searchOrderResults = this.filter == 'ALL' ? this.recentOrderList : this.recentOrderList.filter((obj: any) => obj.status == this.filter);
+
+
     console.log("status Filter :", this.filter);
 
   }

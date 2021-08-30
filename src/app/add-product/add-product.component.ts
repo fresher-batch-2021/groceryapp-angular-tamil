@@ -10,11 +10,10 @@ import { ProductsService } from '../products.service';
 })
 export class AddProductComponent implements OnInit {
 
-  addProductForm : FormGroup;
-  
+  addProductForm: FormGroup;
+
   constructor(private http: HttpClient, private fb: FormBuilder,
-    private productService : ProductsService) 
-  { 
+    private productService: ProductsService) {
     this.addProductForm = this.fb.group({
       productName: new FormControl("", Validators.required),
       unit: new FormControl("", Validators.required),

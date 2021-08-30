@@ -40,13 +40,6 @@ export class ProductsComponent implements OnInit {
     this.itemslist = this.cartService.getCartItems();
   }
 
-
-
-
-  // gotoCart(productName: string, price: number) {
-  //   this.router.navigateByUrl("ordernow?productName=Apple&Kg=1&price=120");
-  // }
-
   getProduct() {
 
     this.productService.getAllProducts().subscribe((res: any) => {

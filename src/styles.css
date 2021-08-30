@@ -1,8 +1,5 @@
 @import '~ngx-toastr/toastr';
 
-
-
-
 *
 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -79,11 +76,6 @@ p
 a[routerLink] {
     cursor: pointer;
 }
-/* .container
-{
-    text-align: center;
-} */
-/* navigation bar start */
 
 .navbar-brand:hover
 {
@@ -117,9 +109,6 @@ a[routerLink] {
     padding: 0;
 }
 
-/* navigation bar end */
-
-/* about css start */
 
 *
 {
@@ -255,5 +244,3 @@ ul
 {
     margin-top: 50px;
 }
-
-/* about css end */

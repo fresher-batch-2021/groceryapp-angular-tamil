@@ -72,7 +72,6 @@ export class LoginComponent implements OnInit {
           console.log("userData", userData);
           if(userData.length === 0)
           {
-            // alert("Invalid Email and Password");
             this.toastr.error("Invalid Email or Password");
           }
           else
@@ -80,12 +79,9 @@ export class LoginComponent implements OnInit {
             let user = userData[0];                       
             localStorage.setItem("LOGGED_IN_USER", JSON.stringify(user));
             window.location.href = "/home";
-            // this.router.navigate(["/home"]);
-            // alert("Login Successfully");
             this.toastr.success("Login Successfully");
           }
         }, err => {
-          // alert("Invalid Username or Password");
           this.toastr.error("Invalid Email or Password");
         })
       }

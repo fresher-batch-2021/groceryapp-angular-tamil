@@ -10,9 +10,8 @@ export class AdminListComponent implements OnInit {
 
   adminDataList: any;
 
-  
-  constructor(private adminService : AdminService) 
-  {
+
+  constructor(private adminService: AdminService) {
     this.adminList();
   }
 
@@ -33,7 +32,7 @@ export class AdminListComponent implements OnInit {
       this.adminDataList = res.docs;
       console.log("Admindatalist", this.adminDataList);
     }, err => {
-      alert("Register Error");
+      alert("Something went wrong");
     })
   }
 }

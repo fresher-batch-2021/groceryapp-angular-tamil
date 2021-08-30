@@ -14,16 +14,14 @@ export class RemoveProductComponent implements OnInit {
   selectedCategory: any;
 
 
-  constructor(private productService : ProductsService) 
-  { 
+  constructor(private productService: ProductsService) {
     this.getAllProducts();
   }
 
   ngOnInit(): void {
   }
 
-  getAllProducts()
-  {
+  getAllProducts() {
     this.productService.getAllProducts().subscribe((res: any) => {
       let data = res.rows;
       this.productList = data.map((obj: any) => obj.doc)

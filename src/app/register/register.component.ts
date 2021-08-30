@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
       remember: new FormControl(false, Validators.required)
     })
 
-    this.userList();
   }
 
   ngOnInit(): void {
@@ -47,13 +46,12 @@ export class RegisterComponent implements OnInit {
 
     let userList = {
       "selector": {
-        "email": this.registerForm.value.email,        
+        "email": this.registerForm.value.email,
         "role": "user"
       },
       "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
     }
     this.userService.userList(userList).subscribe((res: any) => {
-      // console.log("res", res.docs);
       this.userDataList = res.docs;
       console.log("datalist", this.userDataList);
       console.log("datalist Length", this.userDataList.length);
@@ -66,22 +64,20 @@ export class RegisterComponent implements OnInit {
           email: this.registerForm.value.email,
           password: this.registerForm.value.password,
           role: "user",
-          registerDate : new Date()
+          registerDate: new Date()
         }
         console.log("registerObj", registerObj);
 
         this.userService.userRegister(registerObj).subscribe((res: any) => {
           console.log("res", res);
           window.location.href = "/login";
-          // this.router.navigate(["/login"]);
           this.toastr.success("Registration  Successfully");
         }, err => {
           this.toastr.error("Registration Error");
         })
 
       }
-      else
-      {
+      else {
         this.toastr.error("Email Id Already Exists");
       }
 
@@ -89,20 +85,5 @@ export class RegisterComponent implements OnInit {
       console.log("Error", err);
     })
 
-  }
-
-  userList() {
-    // let userList = {
-    //   "selector": {
-    //     "role": "user"
-    //   },
-    //   "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
-    // }
-    // this.userService.userList(userList).subscribe((res: any) => {
-    //   // console.log("res", res.docs);
-    //   this.userDataList = res.docs;
-    //   console.log("datalist", this.userDataList);
-
-    // })
   }
 }
