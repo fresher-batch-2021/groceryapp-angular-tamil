@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-md bg-light navbar-light">
-  <a class="navbar-brand" routerLink="/home" id="logoname"><i class="fas fa-shopping-cart"></i> ninjacart</a>
+  <a class="navbar-brand" routerLink="/home" id="logoname"><i class="fas fa-shopping-cart" aria-hidden="true"></i> ninjacart</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item" *ngIf = "adminEmailValue == true">
-        <a class="nav-link"  routerLinkActive="active" id="liname">Welcome <i class="fas fa-user-tie" aria-hidden="true"></i> <b><em> {{adminEmail.email}}</em></b></a>
+        <a class="nav-link"  routerLinkActive="active" id="liname">Welcome <i class="fas fa-user-tie" aria-hidden="true"></i> <strong><em> {{adminEmail.email}}</em></strong></a>
       </li>
       <li class="nav-item" >
         <a class="nav-link" routerLinkActive="active" routerLink="/home" id="liname"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
