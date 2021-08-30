@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { AdminService } from '../admin.service';
   templateUrl: './admin-list.component.html',
   styleUrls: ['./admin-list.component.css']
 })
-export class AdminListComponent implements OnInit {
+export class AdminListComponent {
 
   adminDataList: any;
 
@@ -15,8 +15,6 @@ export class AdminListComponent implements OnInit {
     this.adminList();
   }
 
-  ngOnInit(): void {
-  }
 
 
   adminList() {

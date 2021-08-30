@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { ProductsService } from '../products.service';
 import * as _ from 'lodash';
 
 @Component({

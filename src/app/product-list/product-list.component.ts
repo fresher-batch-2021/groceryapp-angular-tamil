@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as _ from 'lodash';
 import { ProductsService } from '../products.service';
-import { SearchPipe } from '../search.pipe';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent {
 
   productList: any;
 
@@ -21,8 +20,6 @@ export class ProductListComponent implements OnInit {
     this.getAllProducts();
   }
 
-  ngOnInit(): void {
-  }
 
   categories:any;
   searchResults:any;

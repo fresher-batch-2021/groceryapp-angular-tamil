@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { Userservice } from '../userservice';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   registerForm: FormGroup;
 
@@ -32,9 +32,6 @@ export class RegisterComponent implements OnInit {
       remember: new FormControl(false, Validators.required)
     })
 
-  }
-
-  ngOnInit(): void {
   }
 
   register() {
@@ -68,8 +65,8 @@ export class RegisterComponent implements OnInit {
         }
         console.log("registerObj", registerObj);
 
-        this.userService.userRegister(registerObj).subscribe((res: any) => {
-          console.log("res", res);
+        this.userService.userRegister(registerObj).subscribe((result: any) => {
+          console.log("result", result);
           window.location.href = "/login";
           this.toastr.success("Registration  Successfully");
         }, err => {
