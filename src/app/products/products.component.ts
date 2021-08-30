@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   price: any;
 
   @Input()
-  noOfProducts:number = 0;
+  noOfProducts: number = 0;
 
   products: any;
   categories: any;
@@ -31,8 +31,7 @@ export class ProductsComponent implements OnInit {
     private cartService: CartServiceService,
     private http: HttpClient,
     private productService: ProductsService,
-    private toastr : ToastrService) 
-  { 
+    private toastr: ToastrService) {
     console.log("Products Constructor");
     this.getProduct();
   }
@@ -43,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
 
 
-  
+
   // gotoCart(productName: string, price: number) {
   //   this.router.navigateByUrl("ordernow?productName=Apple&Kg=1&price=120");
   // }
@@ -55,26 +54,17 @@ export class ProductsComponent implements OnInit {
 
       this.products = data.map((obj: any) => obj.doc);
       console.log("pro", this.products);
-      // console.log(this.products);
       this.categories = _.groupBy(this.products, 'category');
       console.log("categories", this.categories);
-      /*let categories = Object.keys(products);
-       console.log("keys",categories);
-       for( let category of categories)
-       {
-         const productItems = products[category];
-         console.log("category",category);
-         console.log(productItems);
-       }*/
     })
   }
 
   getProductItems(category: any) {
-    if(this.noOfProducts == 0){
+    if (this.noOfProducts == 0) {
       return this.categories[category];
     }
-    else{
-      return this.categories[category].slice(0,this.noOfProducts);
+    else {
+      return this.categories[category].slice(0, this.noOfProducts);
     }
   }
 
@@ -84,35 +74,24 @@ export class ProductsComponent implements OnInit {
     console.log("unit :", qty);
     console.log("type :", type)
     console.log("price :", price);
-    // this.product = product;
-    // this.unit = unit;
-    // this.price = price;
-    // this.router.navigateByUrl("ordernow?productName=" + this.product + "&Kg=" + this.unit + "&price=" + this.price);
 
-
-
-    // alert("product added");
     this.toastr.success("Product Added");
     this.totalPrice = qty * price;
     var itemObj = { "id": id, "productName": productName, "unit": qty, "price": price, "totalPrice": this.totalPrice };
     console.log(itemObj);
-    // this.itemslist = itemObj;
-    // console.log("itemlist", this.itemslist);
 
-    // const cartItems = JSON.parse(localStorage.getItem("CART_ITEMS")) || [];
     this.cartService.addItemToCart(itemObj);
 
     this.itemslist = this.cartService.getCartItems();
 
   }
 
-  view(viewCategory : any)
-  {
+  view(viewCategory: any) {
     this.router.navigateByUrl("productcategory/" + viewCategory);
   }
 
-  isItemAdded(productName:string){
-    
-    return this.itemslist.find( (obj:any)=>obj.productName == productName) !=null;
+  isItemAdded(productName: string) {
+
+    return this.itemslist.find((obj: any) => obj.productName == productName) != null;
   }
 }
