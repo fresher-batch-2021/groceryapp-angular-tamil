@@ -5,15 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { ProductModule } from './product/product.module';
-import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ThemeModule } from './theme/theme.module';
+import { CouchDBInterceptor } from './couchdb-interceptor';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { ThemeModule } from './theme/theme.module';
     HomeComponent,
     AboutComponent,
     ImageGalleryComponent,
+    
 
   ],
   imports: [
@@ -44,8 +45,12 @@ import { ThemeModule } from './theme/theme.module';
       timeOut: 2000,
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CouchDBInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports:[
+  ]
 })
 export class AppModule { }

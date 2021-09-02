@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoginDTO } from '../login-dto';
+import { User } from '../user';
 import { Userservice } from '../userservice';
 
 @Component({
@@ -49,14 +51,7 @@ export class LoginComponent implements OnInit {
       alert("Password is Invalid");
     }
     else {
-      const loginObj = {
-        "selector": {
-          "email": this.loginForm.value.email,
-          "password": this.loginForm.value.password
-        },
-        "fields": ["_id", "_rev", "name","email", "password", "role"]
-      }
-
+      
       if (this.loginForm.value.email === null || this.loginForm.value.email.trim() == "") {
         alert("Email is mandatory");
       }
@@ -68,8 +63,11 @@ export class LoginComponent implements OnInit {
       }
       else {
 
-        this.userService.userLogin(loginObj).subscribe((res : any) => {
-          let userData = res.docs;
+        
+        const loginDTO = new LoginDTO(this.loginForm.value.email, this.loginForm.value.password);
+  
+        this.userService.userLogin(loginDTO).subscribe((res : any) => {
+          let userData: User[] = res.docs;
           console.log("userData", userData);
           if(userData.length === 0)
           {
@@ -77,10 +75,11 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            let user = userData[0];                       
+            let user:User = userData[0];                       
             localStorage.setItem("LOGGED_IN_USER", JSON.stringify(user));
-            window.location.href = "/home";
+            
             this.toastr.success("Login Successfully");
+            window.location.href = "/home";
           }
         }, err => {
           this.toastr.error("Invalid Email or Password");

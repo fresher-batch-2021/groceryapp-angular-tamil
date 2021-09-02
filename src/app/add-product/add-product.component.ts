@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class AddProductComponent implements OnInit {
   addProductForm: FormGroup;
 
   constructor(private http: HttpClient, private fb: FormBuilder,
-    private productService: ProductsService) {
+    private productService: ProductsService,
+    private toastr : ToastrService) {
     this.addProductForm = this.fb.group({
       productName: new FormControl("", Validators.required),
       unit: new FormControl("", Validators.required),
@@ -43,6 +45,7 @@ export class AddProductComponent implements OnInit {
     console.log("addProductObj", addProductObj);
 
     this.productService.addNewProducts(addProductObj).subscribe((res: any) => {
+      this.toastr.success("Product added successfully");
       console.log("addNewProducts Result", res);
       window.location.reload();
     }, err => {

@@ -67,7 +67,7 @@ export class RegisterComponent {
 
         this.userService.userRegister(registerObj).subscribe((result: any) => {
           console.log("result", result);
-          window.location.href = "/login";
+          window.location.href = "/auth/login";
           this.toastr.success("Registration  Successfully");
         }, err => {
           this.toastr.error("Registration Error");

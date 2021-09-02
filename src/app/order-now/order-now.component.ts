@@ -61,7 +61,7 @@ export class OrderNowComponent implements OnInit {
         items: this.cartItems,
         createdBy: this.user.email,
         status: "ORDER",
-        date: new Date(),
+        date: new Date().toJSON(),
         totalBillAmount: this.totalBillAmount
       }
       console.log("e", orderData);
@@ -75,7 +75,7 @@ export class OrderNowComponent implements OnInit {
     }
     else {
       this.toastr.error("Please Login or Register");
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/auth/login"]);
     }
   }
 

@@ -9,6 +9,7 @@ import { ProductCategoryComponent } from '../product-category/product-category.c
 import { ProductsComponent } from '../products/products.component';
 import { RemoveProductComponent } from '../remove-product/remove-product.component';
 import { ProductRoutingModule } from './product-routing.module';
+import { ItemAddedToCartDirective } from '../item-added-to-cart.directive';
 
 
 
@@ -21,6 +22,7 @@ import { ProductRoutingModule } from './product-routing.module';
     ProductCategoryComponent,    
     AddProductComponent,
     RemoveProductComponent,
+    ItemAddedToCartDirective
     
 
   ],
