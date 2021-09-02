@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CartServiceService } from '../cart-service.service';
 import { User } from '../user';
 import { Userservice } from '../userservice';
 
@@ -13,12 +14,16 @@ export class HeaderComponent implements OnInit {
 
   user!:Observable<User>;
 
+  cartObj : Observable<any>;
+
   userEmail : any;
 
   constructor(private router : Router,
-    private userService : Userservice) 
+    private userService : Userservice,
+    private cartService : CartServiceService) 
   {
     this.user = userService.loginSubject;
+    this.cartObj = cartService.cartCount;
     
   }
 

@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartServiceService {
 
+  cartCount = new BehaviorSubject<any>(this.getCartItems());
+
   constructor() {
 
   }
+
 
 
   getCartItems() {
@@ -27,6 +31,9 @@ export class CartServiceService {
       cartItems[index].totalPrice = cartItems[index].unit * cartItems[index].price;  
     }
     localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
+    
+    this.cartCount.next(this.getCartItems());
+
 
   }
 
@@ -34,6 +41,7 @@ export class CartServiceService {
 
   emptyCart() {
     localStorage.removeItem("CART_ITEMS");
+    this.cartCount.next(this.getCartItems());
   }
 
   removeItem(index : any)
@@ -43,5 +51,7 @@ export class CartServiceService {
       cartItems.splice(index, 1);
     
     localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems));
+
+    this.cartCount.next(this.getCartItems());
   }
 }

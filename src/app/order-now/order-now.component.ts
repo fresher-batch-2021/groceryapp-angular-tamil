@@ -36,7 +36,8 @@ export class OrderNowComponent implements OnInit {
     this.totalBillAmount = 0;
     for (let item of this.cartItems) {
       this.totalBillAmount += item.unit * item.price;
-    }
+    }    
+
 
   }
 
@@ -81,12 +82,16 @@ export class OrderNowComponent implements OnInit {
 
   emptyCart() {
     localStorage.removeItem("CART_ITEMS");
-    this.cartItems = this.service.getCartItems();
+    this.cartItems = [];
+    this.service.cartCount.next(this.service.getCartItems());
+    this.calculateTotalAmount();
+
   }
 
   removeItem(index: any) {
     this.service.removeItem(index);
     this.cartItems = this.service.getCartItems();
+    this.service.cartCount.next(this.service.getCartItems());
   }
 
   orderMore() {

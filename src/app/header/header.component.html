@@ -23,7 +23,7 @@
 
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"><i
-              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart</a>
+              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart<sup *ngIf="( cartObj | async) let cart;">{{cart.length}}</sup></a>
         </li>
 
 
@@ -50,8 +50,8 @@
         </li>
 
         <li class="nav-item" *ngIf="userDetail.role=='user'">
-          <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"><i
-              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"   ><i
+              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart <span>( 0 )</span>  </a>
         </li>
 
 
