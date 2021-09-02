@@ -12,16 +12,14 @@
             aria-hidden="true"></i> Home</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/about" id="liname"><i class="fas fa-info-circle"
-            aria-hidden="true"></i> About</a>
-      </li>
-
-
 
 
       <ng-template #notloggedin>
 
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/about" id="liname"><i class="fas fa-info-circle"
+              aria-hidden="true"></i> About</a>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"><i
@@ -45,6 +43,11 @@
 
       </ng-template>
       <ng-container *ngIf="(user | async) let userDetail else notloggedin">
+
+        <li class="nav-item" *ngIf="userDetail.role=='user'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/about" id="liname"><i class="fas fa-info-circle"
+              aria-hidden="true"></i> About</a>
+        </li>
 
         <li class="nav-item" *ngIf="userDetail.role=='user'">
           <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"><i
