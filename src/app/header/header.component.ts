@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from '../user';
+import { Userservice } from '../userservice';
 
 @Component({
   selector: 'app-header',
@@ -8,32 +11,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  user!:Observable<User>;
+
   userEmail : any;
 
-  adminEmail : any;
-  adminEmailValue = false;
-  emailValue = false;
-
-  constructor(private router : Router) 
+  constructor(private router : Router,
+    private userService : Userservice) 
   {
-    let admin = localStorage.getItem("LOGGED_IN_ADMIN");
-    this.adminEmail = admin != null ? JSON.parse(admin) : [];
-    console.log("adminEmail", this.adminEmail);
-
-    if(this.adminEmail.email != null)
-    {
-      this.adminEmailValue = true;
-      console.log("adminemail", this.adminEmail.email);
-    }
-    let user = localStorage.getItem("LOGGED_IN_USER");
-    this.userEmail = user != null ? JSON.parse(user) : [];
-    console.log("email", this.userEmail.email);
-
-    if(this.userEmail.email != null)
-    {
-      this.emailValue = true;
-      console.log("emailvalue", this.emailValue);
-    }
+    this.user = userService.loginSubject;
+    
   }
 
   ngOnInit(): void {
@@ -42,6 +28,7 @@ export class HeaderComponent implements OnInit {
 
   logOut()
   {
+    this.userService.loginSubject.next(null);
     localStorage.removeItem("LOGGED_IN_USER");
     window.location.href = "/auth/login";
   }

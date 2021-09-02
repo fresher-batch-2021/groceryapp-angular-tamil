@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CartServiceService {
 
-  constructor(private http: HttpClient) {
+  constructor() {
 
   }
 

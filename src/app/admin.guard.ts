@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
 
-      let adminStr = localStorage.getItem("LOGGED_IN_ADMIN");
+      let adminStr = localStorage.getItem("LOGGED_IN_USER");
       let admin = adminStr != null ? JSON.parse(adminStr) : [];
 
       if(admin.email != null && admin.role == "admin")

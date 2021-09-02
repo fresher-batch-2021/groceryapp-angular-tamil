@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginDTO } from './login-dto';
 
@@ -7,6 +8,8 @@ import { LoginDTO } from './login-dto';
   providedIn: 'root'
 })
 export class Userservice {
+
+loginSubject = new BehaviorSubject<any>(this.getUser());
 
   collectionName = "grocerystoreapp_users";
   basicAuth = "Basic " + btoa(environment.dbUsername + ":" + environment.dbPassword);
@@ -27,6 +30,7 @@ export class Userservice {
     //return this.http.post(environment.url + this.collectionName + "/_find", loginObj, { headers: { Authorization: this.basicAuth } })
     return this.http.post(environment.url + this.collectionName + "/_find", loginObj)
   }
+  
 
   userRegister(registerObj: any) {
     return this.http.post(environment.url + this.collectionName, registerObj)
@@ -34,5 +38,16 @@ export class Userservice {
 
   userList(userList: any) {
     return this.http.post(environment.url + this.collectionName + "/_find", userList)
+  }
+
+
+  getUser()
+  {
+    let admin = localStorage.getItem("LOGGED_IN_USER");
+    if(admin){
+      return JSON.parse(admin);
+    }
+    return null;
+
   }
 }

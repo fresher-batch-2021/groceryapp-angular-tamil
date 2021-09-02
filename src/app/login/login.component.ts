@@ -75,8 +75,9 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            let user:User = userData[0];                       
+            let user:User = userData[0];                                   
             localStorage.setItem("LOGGED_IN_USER", JSON.stringify(user));
+            this.userService.loginSubject.next(user);
             
             this.toastr.success("Login Successfully");
             window.location.href = "/home";

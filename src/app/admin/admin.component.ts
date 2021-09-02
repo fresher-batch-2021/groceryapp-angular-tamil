@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit {
       }
       else {
         let adminObj = data[0];
-        localStorage.setItem("LOGGED_IN_ADMIN", JSON.stringify(adminObj));
+        localStorage.setItem("LOGGED_IN_USER", JSON.stringify(adminObj));
         window.location.href = "/adminPanel";
         this.toastr.success("Login Successfully");
       }
