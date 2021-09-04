@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AdminGuard } from './admin.guard';
 import { AuthGuard } from './auth.guard';
+import { ChartComponent } from './chart/chart.component';
 import { HomeComponent } from './home/home.component';
 import { MyOrderComponent } from './my-order/my-order.component';
 import { OrderNowComponent } from './order-now/order-now.component';
@@ -22,6 +23,9 @@ const routes: Routes = [
  
   {
     path: "ordernow", component: OrderNowComponent,
+  },
+  {
+    path: "flowChart", component: ChartComponent,
   },
  
  

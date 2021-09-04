@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ThemeModule } from './theme/theme.module';
 import { CouchDBInterceptor } from './couchdb-interceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { CouchDBInterceptor } from './couchdb-interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CouchDBInterceptor, multi: true },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

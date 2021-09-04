@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-image-gallery',
@@ -7,5 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ImageGalleryComponent {
 
+  @ViewChild('carousel')
+  input!: ElementRef<HTMLInputElement>;
 
+  constructor(){}
+
+  ngAfterViewInit()
+  {
+    console.log(this.input.nativeElement);
+    setTimeout(() => {(this.input.nativeElement);}, 2000);
+  }
 }

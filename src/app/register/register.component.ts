@@ -50,8 +50,8 @@ export class RegisterComponent {
     }
     this.userService.userList(userList).subscribe((res: any) => {
       this.userDataList = res.docs;
-      console.log("datalist", this.userDataList);
-      console.log("datalist Length", this.userDataList.length);
+      console.log("listofUsers", this.userDataList);
+      console.log("listofUsers Length", this.userDataList.length);
 
       if (this.userDataList.length === 0) {
 

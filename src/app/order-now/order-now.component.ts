@@ -8,26 +8,25 @@ import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-order-now',
   templateUrl: './order-now.component.html',
-  styleUrls: ['./order-now.component.css']
+  styleUrls: ['./order-now.component.css'],
 })
 export class OrderNowComponent implements OnInit {
-
   cartItems: any;
 
   user: any;
 
-
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private service: CartServiceService,
     private orderService: OrderService,
     private router: Router,
-    private toastr: ToastrService) {
-
+    private toastr: ToastrService
+  ) {
     this.cartItems = this.service.getCartItems();
-    console.log("cart", this.cartItems);
-    let userEmail = localStorage.getItem("LOGGED_IN_USER");
+    console.log('cart', this.cartItems);
+    let userEmail = localStorage.getItem('LOGGED_IN_USER');
     this.user = userEmail != null ? JSON.parse(userEmail) : [];
-    console.log("user.email", this.user.email);
+    console.log('user.email', this.user.email);
 
     this.calculateTotalAmount();
   }
@@ -36,9 +35,7 @@ export class OrderNowComponent implements OnInit {
     this.totalBillAmount = 0;
     for (let item of this.cartItems) {
       this.totalBillAmount += item.unit * item.price;
-    }    
-
-
+    }
   }
 
   ngOnInit(): void {}
@@ -56,36 +53,32 @@ export class OrderNowComponent implements OnInit {
   }
 
   confirmOrder() {
-    if (this.user.email != null && this.user.email != "") {
-      this.toastr.success("Order Added Successfully");
+    if (this.user.email != null && this.user.email != '') {
+      this.toastr.success('Order Added Successfully');
       let orderData = {
         items: this.cartItems,
         createdBy: this.user.email,
-        status: "ORDER",
+        status: 'ORDER',
         date: new Date().toJSON(),
-        totalBillAmount: this.totalBillAmount
-      }
-      console.log("e", orderData);
+        totalBillAmount: this.totalBillAmount,
+      };
+      console.log('e', orderData);
 
-      this.orderService.placeOrder(orderData).subscribe(res => {
+      this.orderService.placeOrder(orderData).subscribe((res) => {
         this.service.emptyCart();
-        this.router.navigate(["/myOrder"]);
-      })
-
-
-    }
-    else {
-      this.toastr.error("Please Login or Register");
-      this.router.navigate(["/auth/login"]);
+        this.router.navigate(['/myOrder']);
+      });
+    } else {
+      this.toastr.error('Please Login or Register');
+      this.router.navigate(['/auth/login']);
     }
   }
 
   emptyCart() {
-    localStorage.removeItem("CART_ITEMS");
+    localStorage.removeItem('CART_ITEMS');
     this.cartItems = [];
     this.service.cartCount.next(this.service.getCartItems());
     this.calculateTotalAmount();
-
   }
 
   removeItem(index: any) {
@@ -95,6 +88,6 @@ export class OrderNowComponent implements OnInit {
   }
 
   orderMore() {
-    this.router.navigate(["/home"]);
+    this.router.navigate(['/home']);
   }
 }
