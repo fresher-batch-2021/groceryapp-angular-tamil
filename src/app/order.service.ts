@@ -31,4 +31,18 @@ export class OrderService {
     return this.http.put(environment.url + this.collectionName + "/" + order._id + "?rev=" + order._rev, order)
   }
 
+  deliveredList()
+  {
+
+    let deliveredObj = {
+
+        selector:{
+            "status":"DELIVERED"
+        },
+        sort: [{ deliveredDate: 'desc' }],
+    
+    }
+    return this.http.post(environment.url + this.collectionName + "/_find", deliveredObj)
+  }
+
 }

@@ -51,7 +51,7 @@
 
         <li class="nav-item" *ngIf="userDetail.role=='user'">
           <a class="nav-link" routerLinkActive="active" routerLink="/ordernow" id="liname"   ><i
-              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart <span>( 0 )</span>  </a>
+              class="fas fa-shopping-basket" aria-hidden="true"></i> Cart <sup *ngIf="( cartObj | async) let cart;">{{cart.length}}</sup>  </a>
         </li>
 
 

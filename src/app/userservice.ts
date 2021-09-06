@@ -22,7 +22,7 @@ export class Userservice {
         email: loginDTO.email,
         password: loginDTO.password,
       },
-      fields: ['_id', '_rev', 'name', 'email', 'password', 'role'],
+      fields: ['_id', '_rev', 'name', 'email', 'password', 'role', 'account'],
     };
 
     //return this.http.post(environment.url + this.collectionName + "/_find", loginObj, { headers: { Authorization: this.basicAuth } })
@@ -44,9 +44,7 @@ export class Userservice {
   }
 
   getAllUsers() {
-    // let beforeDate = new Date().toJSON();
    
-
     let getUserObj = {
       selector: {
 
@@ -65,5 +63,12 @@ export class Userservice {
       return JSON.parse(admin);
     }
     return null;
+  }
+
+
+  userAccountStatus(users : any)
+  {
+    console.log("users", users);
+    return this.http.put(environment.url + this.collectionName+ "/" + users._id + "?rev=" + users._rev, users);
   }
 }

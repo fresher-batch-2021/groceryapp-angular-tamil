@@ -3,127 +3,210 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Userservice } from '../userservice';
 import * as _ from 'lodash';
-import { DatePipe } from '@angular/common';
+import { UserRegisterDateService } from '../user-register-date.service';
+import { OrderService } from '../order.service';
+
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent {
+
+  deliveredDates : any;
 
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['Today','Last 7 Days', 'Current Month', 'Current Year'];
+  barChartLabels: Label[] = [
+    'Today',
+    'Last Week',
+    'Current Month',
+    'Current Year',
+  ];
   barChartType: ChartType = 'doughnut';
   barChartLegend = true;
   barChartPlugins = [];
 
-  public barChartData: any = [
-    { data: [] }
-  ];
+  barChartData: any = [{ data: [] }];
 
+  constructor(
+    private userService: Userservice,
+    private userRegisterDate: UserRegisterDateService,
+    private orderService : OrderService
+  ) {
+    let today = this.userRegisterDate.today();
 
+    let sevenDays = this.userRegisterDate.sevenDays();
 
+    let currentMonth = this.userRegisterDate.currentMonth();
 
-  constructor(private userService : Userservice,
-    private datepipe : DatePipe)
-  {
-    let today = new Date().toJSON();
+    let newYear = this.userRegisterDate.currentYear();
 
-    let lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 6);    
-    let sevenDays = lastWeek.toJSON();
-    console.log("sevenDays", sevenDays);
+    this.userService.getAllUsers().subscribe((data: any) => {
+      let userData = data.docs;
 
-    let date = new Date();
-    let firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
-    let currentMonth = firstDay.toJSON();
+      let newdate = userData.map((obj: any) => obj.registerDate);
 
-    let currentYear = new Date();
-    currentYear.setFullYear(currentYear.getFullYear(), 0,1);    
-    let newYear = currentYear.toJSON();
-    console.log("newYear", newYear);
-   
-
-    this.userService.getAllUsers().subscribe((data : any) => {
-      let userData = data.docs;     
-      console.log("total Users", userData) ;
-      let newdate = userData.map((obj : any)  => obj.registerDate);
-      
-      
       // today Users Count
       let todayNewUsers = 0;
       let todayUsersList = [];
-      for(let obj of newdate){
-        if(today.substring(0,10) == obj.substring(0,10)){
+      for (let obj of newdate) {
+        if (today.substring(0, 10) == obj.substring(0, 10)) {
           todayNewUsers++;
           todayUsersList.push(obj);
         }
       }
-      console.log(todayNewUsers)
-      console.log(todayUsersList)
-          //  
+      //
 
-          // Last Seven Days
-          let sevenDaysCount = 0;
-          let sevenDaysUser = [];
-          for(let obj of newdate)
-          {
-            if(today.substring(0,10) >= obj.substring(0,10) && sevenDays.substring(0,10) <= obj.substring(0,10))            
-            {
-              sevenDaysCount++;
-              sevenDaysUser.push(obj);
-            }
-          }
+      // Last Seven Days
+      let sevenDaysCount = 0;
+      let sevenDaysUser = [];
+      for (let obj of newdate) {
+        if (
+          today.substring(0, 10) >= obj.substring(0, 10) &&
+          sevenDays.substring(0, 10) <= obj.substring(0, 10)
+        ) {
+          sevenDaysCount++;
+          sevenDaysUser.push(obj);
+        }
+      }
 
-          console.log("seventdayuserlist", sevenDaysUser);
-          console.log("sevendayCount", sevenDaysCount);
-          // 
+      //
 
-          // Current Month User Count
-          let currentMonthUser = 0;
-          let monthUser = [];
-          for(let month of newdate)
-          {
-            if(today.substring(0,10) >= month.substring(0,10) && currentMonth.substring(0,10) <= month.substring(0,10))
-            {
-              currentMonthUser++;
-              monthUser.push(month);
-            }
-          }
+      // Current Month User Count
+      let currentMonthUser = 0;
+      let monthUser = [];
+      for (let month of newdate) {
+        if (
+          today.substring(0, 10) >= month.substring(0, 10) &&
+          currentMonth.substring(0, 10) <= month.substring(0, 10)
+        ) {
+          currentMonthUser++;
+          monthUser.push(month);
+        }
+      }
 
-          console.log("monthUser", currentMonthUser);
-          console.log("monthUserli", monthUser);
-          //
+      //
 
-          // Current Year User List
+      // Current Year User List
 
-          let currentYearCount = 0;
-          let currentYearUser = [];
-          for(let year of newdate)
-          {
-            if(newYear.substring(0,10) <= year.substring(0,10) && today.substring(0,10) >= year.substring(0,10))
-            {
-              currentYearCount++;
-              currentYearUser.push(year);
-            }
-          }
+      let currentYearCount = 0;
+      let currentYearUser = [];
+      for (let year of newdate) {
+        if (
+          newYear.substring(0, 10) <= year.substring(0, 10) &&
+          today.substring(0, 10) >= year.substring(0, 10)
+        ) {
+          currentYearCount++;
+          currentYearUser.push(year);
+        }
+      }
 
-          console.log("yearCount", currentYearCount);
-          console.log("yearUser", currentYearUser);
-          // year end
+      // year end
+
+      this.barChartData = [
+        {
+          label: 'New Users List',
+          data: [
+            todayNewUsers,
+            sevenDaysCount,
+            currentMonthUser,
+            currentYearCount,
+          ],
+        },
+      ];
 
 
-      this.barChartData = [{label: "New Users List", data: [todayNewUsers, sevenDaysCount, currentMonthUser, currentYearCount] },];
+    });
 
-    })
-
-
-
+    this.getOrderList();
   }
 
 
+
+  // Price Chart start
+
+  getOrderList() {
+
+    let today = this.userRegisterDate.today();
+
+    let sevenDays = this.userRegisterDate.sevenDays();
+
+    let currentMonth = this.userRegisterDate.currentMonth();
+
+    let newYear = this.userRegisterDate.currentYear();
+
+
+    this.orderService.deliveredList().subscribe((res: any) => {
+      let row = res.docs;
+      let docs = row.map((obj: any) => obj.deliveredDate);
+      this.deliveredDates = docs;
+    
+// today sales count
+    let todaySalesCount = 0;
+    let todaySalesList = [];
+    for(let day of this.deliveredDates)
+    {
+      if(today.substring(0,10) == day.substring(0,10))
+      {
+        todaySalesCount++;
+        todaySalesList.push(day);
+      }   
+    }
+    // end
+    
+    // last week sales count
+
+    let lastWeekSalesCount = 0;
+    let lastWeekSalesList = [];
+    for(let week of this.deliveredDates)
+    {
+      if(today.substring(0, 10) >= week.substring(0, 10) &&
+      sevenDays.substring(0, 10) <= week.substring(0, 10))
+      {
+        lastWeekSalesCount++;
+        lastWeekSalesList.push(week);
+      }   
+    }
+    // end
+
+
+     // last month sales count
+
+     let lastMonthSalesCount = 0;
+     let lastMonthSalesList = [];
+     for(let month of this.deliveredDates)
+     {
+       if(today.substring(0, 10) >= month.substring(0, 10) &&
+       currentMonth.substring(0, 10) <= month.substring(0, 10))
+       {
+        lastMonthSalesCount++;
+         lastMonthSalesList.push(month);
+       }   
+     } 
+     // end
+
+
+          // last month sales count
+
+          let currentYearSalesCount = 0;
+          let currentYearSalesList = [];
+          for(let year of this.deliveredDates)
+          {
+            if(newYear.substring(0, 10) <= year.substring(0, 10) &&
+            today.substring(0, 10) >= year.substring(0, 10))
+            {
+              currentYearSalesCount++;
+             currentYearSalesList.push(year);
+            }   
+          }
+          // end
+  });
+
+  }
+
+  
 
 }

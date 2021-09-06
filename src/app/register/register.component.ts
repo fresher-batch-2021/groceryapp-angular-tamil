@@ -61,7 +61,9 @@ export class RegisterComponent {
           email: this.registerForm.value.email,
           password: this.registerForm.value.password,
           role: "user",
-          registerDate: new Date()
+          registerDate: new Date(),
+          account: "Active"
+
         }
         console.log("registerObj", registerObj);
 

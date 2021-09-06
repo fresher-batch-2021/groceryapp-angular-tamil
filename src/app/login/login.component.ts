@@ -73,6 +73,10 @@ export class LoginComponent implements OnInit {
           {
             this.toastr.error("Invalid Email or Password");
           }
+          else if(userData[0].account === 'Deactive')
+          {
+            this.toastr.warning("Your Account was blocked");
+          }
           else
           {
             let user:User = userData[0];                                   

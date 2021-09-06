@@ -6,6 +6,8 @@
         <th scope="col">Mobile Number</th>
         <th scope="col">Email Address</th>
         <th scope="col">Register Date</th>
+        <th scope="col">Account Status</th>
+        <th scope="col">Action</th>
     </thead>
     <tbody *ngFor = "let users of userDataList; let i = index">
         <td>{{i+1}}</td>
@@ -13,5 +15,7 @@
         <td>{{users.mobileNo}}</td>
         <td>{{users.email}}</td>
         <td>{{users.registerDate | date : "dd-MMM-yyyy hh:mm:ss a"}}</td>
+        <td>{{users.account}}</td>
+        <td><a href="/adminPanel/user/userList" (click)="changeUserStatus(users)" >Deactive</a></td>
     </tbody>
 </table>
