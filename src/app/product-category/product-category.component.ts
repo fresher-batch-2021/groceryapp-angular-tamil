@@ -4,6 +4,7 @@ import { CartServiceService } from '../cart-service.service';
 import { ProductsService } from '../products.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { Productdto } from 'src/class-folder/productdto';
 
 @Component({
   selector: 'app-product-category',
@@ -42,13 +43,13 @@ export class ProductCategoryComponent implements OnInit {
 
   getProduct() {
 
-    this.productService.getAllProducts().subscribe((res: any) => {
-      let data: any = res.rows;
+    this.productService.getAvailableProducts().subscribe((res: any) => {
+      let data: Productdto[] = res.docs;
 
-      this.products = data.map((obj: any) => obj.doc);
-      console.log("pro", this.products);
+      // this.products = data.map((obj: any) => obj.doc);
+      // console.log("pro", this.products);
 
-      this.categories = _.groupBy(this.products, 'category');
+      this.categories = _.groupBy(data, 'category');
       console.log("categories", this.categories[this.viewCategory]);
       this.items = this.categories[this.viewCategory];
       console.log("items", this.items);
@@ -56,7 +57,7 @@ export class ProductCategoryComponent implements OnInit {
     })
   }
 
-  addCart(id: number, productName: string, qty: number, type: string, price: number) {
+  addCart(id: string, rev: string, productName: string, qty: number, type: string, price: number, stock : number, category : string, imgUrl : string, stocktype : string) {
     console.log("id", id);
     console.log("product :", productName);
     console.log("unit :", qty);
@@ -66,7 +67,7 @@ export class ProductCategoryComponent implements OnInit {
 
     this.toastr.success("Product Added");
     this.totalPrice = qty * price;
-    var itemObj = { "id": id, "productName": productName, "unit": qty, "price": price, "totalPrice": this.totalPrice };
+    var itemObj = { "id": id, "rev": rev, "productName": productName, "unit": qty, "price": price, "totalPrice": this.totalPrice, "stock": stock, "category": category, "imgUrl": imgUrl, "type": stocktype };
     console.log(itemObj);
 
 

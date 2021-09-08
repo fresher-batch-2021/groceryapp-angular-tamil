@@ -4,6 +4,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductCategoryComponent } from '../product-category/product-category.component';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { RemoveProductComponent } from '../remove-product/remove-product.component';
+import { UpdateProductComponent } from '../update-product/update-product.component';
 
 const routes: Routes = [
 
@@ -17,6 +18,7 @@ const routes: Routes = [
     {
         path: "removeProduct", component: RemoveProductComponent
     },
+
 ];
 
 @NgModule({

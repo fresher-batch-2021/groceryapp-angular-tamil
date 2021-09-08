@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterDto } from 'src/class-folder/register-dto';
+import { UserRegister } from 'src/class-folder/user-register';
 import { Userservice } from '../userservice';
 
 @Component({
@@ -14,7 +16,7 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
 
-  userDataList: any;
+  userDataList!: UserRegister[];
 
   existEmail: any;
   existPhoneno: any;
@@ -67,7 +69,9 @@ export class RegisterComponent {
         }
         console.log("registerObj", registerObj);
 
-        this.userService.userRegister(registerObj).subscribe((result: any) => {
+        const registerDto = new RegisterDto(registerObj);
+
+        this.userService.userRegister(registerDto).subscribe((result: any) => {
           console.log("result", result);
           window.location.href = "/auth/login";
           this.toastr.success("Registration  Successfully");

@@ -13,6 +13,7 @@
         <th scope="col">Price</th>
         <th scope="col">imageUrl</th>
         <th scope="col">Category</th>
+        <th scope="col">Action</th>
     </thead>
     <tbody *ngFor="let list of (ascProductList | category:selectedCategory); let i=index">       
         <td>{{i+1}}</td>   
@@ -20,5 +21,6 @@
         <td>{{list.price}}</td>
         <td>{{list.imageUrl}}</td>
         <td>{{list.category}}</td>
+        <td><a (click)=editProduct(list)>Update</a></td>
     </tbody>
 </table>

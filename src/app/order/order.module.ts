@@ -4,7 +4,7 @@ import { MyOrderComponent } from '../my-order/my-order.component';
 import { OrderNowComponent } from '../order-now/order-now.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlaceOrdersComponent } from '../place-orders/place-orders.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { AppRoutingModule } from '../../class-folder/app-routing.module';
 import { RouterModule } from '@angular/router';
 
 

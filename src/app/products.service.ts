@@ -13,7 +13,30 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
-    return this.http.get(environment.url + this.collectionName + "/_all_docs?include_docs=true")
+
+    let avaliableProducts = {
+      "selector" : {
+         
+      }  
+    };  
+      return this.http.post(environment.url + this.collectionName + "/_find", avaliableProducts)
+    
+  }
+
+  getAvailableProducts() {
+
+    let avaliableProducts = {
+      "selector" : {
+          "stock": {
+              "$gt": 0
+          }
+      }    
+  }
+    return this.http.post(environment.url + this.collectionName + "/_find", avaliableProducts)
+  }
+
+  getProduct(id:string) {
+    return this.http.get(environment.url + this.collectionName + "/"+ id)
   }
 
   addNewProducts(addProductObj: any) {
@@ -22,5 +45,16 @@ export class ProductsService {
 
   removeProducts(id: any, rev: any) {
     return this.http.delete(environment.url + this.collectionName + "/" + id + "?rev=" + rev)
+  }
+
+  updateProducts(id : any, rev : any,updateProductObj : any)
+  {
+    return this.http.put(environment.url + this.collectionName + "/" + id + "?rev=" + rev, updateProductObj)
+  }
+
+  updateProuductsStock(product:any)
+  {
+
+    return this.http.put(environment.url + this.collectionName + "/" + product._id , product)
   }
 }

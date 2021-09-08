@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartServiceService } from '../cart-service.service';
-import { User } from '../user';
+import { User } from '../../class-folder/user';
 import { Userservice } from '../userservice';
 
 @Component({

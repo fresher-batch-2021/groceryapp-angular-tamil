@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { ProductsService } from '../products.service';
+import { Items, MyorderDto } from '../myorder-dto';
 
 @Component({
   selector: 'app-my-order',
@@ -16,7 +18,8 @@ export class MyOrderComponent implements OnInit {
   descPlaceOrderList: any;
 
   constructor(private orderService: OrderService,
-    private toastr : ToastrService) {
+    private toastr : ToastrService,
+    private productService : ProductsService) {
     this.email = localStorage.getItem('LOGGED_IN_USER');
     this.userEmail = this.email != null ? JSON.parse(this.email) : [];
     console.log('email', this.userEmail.email);
@@ -27,13 +30,8 @@ export class MyOrderComponent implements OnInit {
   }
 
   getAllProduct() {
-    let query = {
-      selector: {
-        createdBy: this.userEmail.email,
-      },
-    };
-
-    this.orderService.getMyOrders(query).subscribe(
+    
+    this.orderService.getMyOrders(this.userEmail.email).subscribe(
       (res: any) => {
         console.log('res', res.docs);
         this.placeOrderList = res.docs;
@@ -64,12 +62,42 @@ export class MyOrderComponent implements OnInit {
       order.comments = userOrderCancelled;
       order.cancelledDate = new Date().toJSON();
 
+      // console.log("##%$#%#@", order.items);
+      // const myorderDto = new MyorderDto(order);
+      // const item = new Items(order.items);
+      // console.log(myorderDto, item);
+
+
       this.orderService.updateStatus(order).subscribe((res) => {
+        this.increaseStock(order);
         console.log('Cancelled Status Changed Successfully', res);
         this.toastr.success("Order Cancelled successfully");
         document.location.reload();
       });
     }
+  }
+
+  increaseStock(order : any)
+  {
+
+    console.log("order###", order.items);
+
+    for(let item of order.items)
+    {
+      console.log(item);
+
+      this.productService.getProduct(item.id).subscribe(res=>{
+
+        let product:any = res;
+        product.stock += item.unit ;
+        this.productService.updateProuductsStock(product).subscribe(res=>{
+          console.log(item +" stock updated");
+        })
+
+      })
+
+    }
+    
   }
 
   getStyle(status: any) {

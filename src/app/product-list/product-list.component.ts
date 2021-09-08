@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { ProductsService } from '../products.service';
 
@@ -15,7 +16,8 @@ export class ProductListComponent {
 
   ascProductList: any;
 
-  constructor(private productService : ProductsService) 
+  constructor(private productService : ProductsService,
+    private router : Router) 
   { 
     this.getAllProducts();
   }
@@ -26,13 +28,21 @@ export class ProductListComponent {
   getAllProducts()
   {
     this.productService.getAllProducts().subscribe((res: any) => {
-      let data = res.rows;
-      this.productList = data.map((obj: any) => obj.doc)
+
+      console.log(res.docs);
+      let data = res.docs;
+      // this.productList = data.map((obj: any) => obj.doc)
       
-      this.categories = _.uniq(this.productList.map((obj:any)=>obj.category));
-      console.log("productList", this.productList);
-      this.ascProductList = _.orderBy(this.productList, ['category'], ['asc']);
-      console.log("Ascending Product List  :", this.ascProductList);
+      this.categories = _.uniq(data.map((obj:any)=>obj.category));
+      this.ascProductList = _.orderBy(data, ['category'], ['asc']);
+      console.log("asd", this.ascProductList);
     })
+  }
+
+
+  editProduct(list : any)
+  {
+    localStorage.setItem("updateProduct",JSON.stringify(list));
+    this.router.navigate(["/adminPanel/updateProduct"]);
   }
 }

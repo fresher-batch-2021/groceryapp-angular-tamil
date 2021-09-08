@@ -22,6 +22,7 @@ export class AddProductComponent implements OnInit {
       type: new FormControl("", Validators.required),
       category: new FormControl("", Validators.required),
       price: new FormControl("", Validators.required),
+      stock : new FormControl("", Validators.required),
       imgUrl: new FormControl("", Validators.required)
 
     })
@@ -37,6 +38,7 @@ export class AddProductComponent implements OnInit {
     let addProductObj = {
       "name": this.addProductForm.value.productName,
       "price": this.addProductForm.value.price,
+      "stock": this.addProductForm.value.stock,
       "unit": this.addProductForm.value.unit,
       "type": this.addProductForm.value.type,
       "category": this.addProductForm.value.category,

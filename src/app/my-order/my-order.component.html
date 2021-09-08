@@ -36,7 +36,7 @@
             <td><span class="badge" [style.background-color]="getStyle(place.status)">{{place.status}}</span></td>
             <td *ngIf="place.status=='CANCELLED'"> {{place.cancelledDate | date : "dd-MMM-yyyy"}} <br> {{place.cancelledDate | date : "hh:mm:ss a"}} </td>
             <td *ngIf="place.status!='CANCELLED'"> {{place.deliveredDate | date : "dd-MMM-yyyy"}} <br> {{place.deliveredDate | date : "hh:mm:ss a"}}</td>
-            <td><a *ngIf="place.status=='ORDER'" href="/myOrder" (click)="changeCancelled(place)">Cancel</a></td>
+            <td><a *ngIf="place.status=='ORDER'"  (click)="changeCancelled(place)">Cancel</a></td>
         </tbody>
     </table>
    </div>

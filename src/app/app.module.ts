@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from '../class-folder/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -15,6 +15,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { ThemeModule } from './theme/theme.module';
 import { CouchDBInterceptor } from './couchdb-interceptor';
 import { DatePipe } from '@angular/common';
+import { UpdateProductComponent } from './update-product/update-product.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ErrorInterceptor } from './error.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import { DatePipe } from '@angular/common';
     HomeComponent,
     AboutComponent,
     ImageGalleryComponent,
+    UpdateProductComponent,
     
 
   ],
@@ -37,6 +42,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     
 
     BrowserAnimationsModule,
@@ -48,6 +54,11 @@ import { DatePipe } from '@angular/common';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CouchDBInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
     DatePipe,
   ],
   bootstrap: [AppComponent],

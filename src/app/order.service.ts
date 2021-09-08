@@ -22,7 +22,13 @@ export class OrderService {
     return this.http.get(environment.url + this.collectionName + "/_all_docs?include_docs=true")
   }
 
-  getMyOrders(query: any) {
+  getMyOrders(email: string) {
+
+    let query = {
+      selector: {
+        createdBy: email,
+      },
+    };
 
     return this.http.post(environment.url + this.collectionName + "/_find", query)
   }

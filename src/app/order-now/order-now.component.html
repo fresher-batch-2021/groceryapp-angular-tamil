@@ -20,7 +20,7 @@
             <tr *ngFor="let item of cartItems;let i=index">
                 <td>{{i+1}}</td>
                 <td>{{item.productName}}</td>
-                <td><input type="number" [(ngModel)]="cartItems[i].unit" (change)="updatePrice(i)" min="1" max="100">
+                <td><input type="number" [(ngModel)]="cartItems[i].unit" (change)="updatePrice(i,item.stock)" max="{{item.stock}}" min="1">
                 </td>
                 <td>{{item.price}}</td>
                 <td>{{item.totalPrice}}</td>

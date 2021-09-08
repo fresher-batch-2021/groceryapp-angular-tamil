@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginDTO } from '../login-dto';
-import { User } from '../user';
+import { LoginDTO } from '../../class-folder/login-dto';
+import { User } from '../../class-folder/user';
 import { Userservice } from '../userservice';
 
 @Component({
@@ -67,7 +67,8 @@ export class LoginComponent implements OnInit {
         const loginDTO = new LoginDTO(this.loginForm.value.email, this.loginForm.value.password);
   
         this.userService.userLogin(loginDTO).subscribe((res : any) => {
-          let userData: User[] = res.docs;
+          let userData = res.docs;
+          console.log("rrr", res);
           console.log("userData", userData);
           if(userData.length === 0)
           {

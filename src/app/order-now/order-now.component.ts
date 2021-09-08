@@ -20,7 +20,8 @@ export class OrderNowComponent implements OnInit {
     private service: CartServiceService,
     private orderService: OrderService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private productService : ProductsService
   ) {
     this.cartItems = this.service.getCartItems();
     console.log('cart', this.cartItems);
@@ -44,34 +45,68 @@ export class OrderNowComponent implements OnInit {
 
   totalBillAmount = 0;
 
-  updatePrice(index: number) {
+  updatePrice(index: number, stock: number) {
+    
+    
     console.log('change ', index);
     let cartItem = this.cartItems[index];
-    cartItem.totalPrice = cartItem.unit * cartItem.price;
-    this.cartItems[index] = cartItem;
-    this.calculateTotalAmount();
+    if(cartItem.unit > stock){      
+      this.toastr.error("Insufficient stocks");
+      this.calculateTotalAmount(); 
+    }
+    else{
+      cartItem.totalPrice = cartItem.unit * cartItem.price;
+      this.cartItems[index] = cartItem;
+      this.calculateTotalAmount();
+    }
   }
 
-  confirmOrder() {
-    if (this.user.email != null && this.user.email != '') {
-      this.toastr.success('Order Added Successfully');
-      let orderData = {
-        items: this.cartItems,
-        createdBy: this.user.email,
-        status: 'ORDER',
-        date: new Date().toJSON(),
-        totalBillAmount: this.totalBillAmount,
-      };
-      console.log('e', orderData);
 
-      this.orderService.placeOrder(orderData).subscribe((res) => {
-        this.service.emptyCart();
-        this.router.navigate(['/myOrder']);
-      });
-    } else {
-      this.toastr.error('Please Login or Register');
-      this.router.navigate(['/auth/login']);
+  confirmOrder() {
+    if (this.user.email == null || this.user.email == '' || this.user.email == undefined){      
+        this.toastr.error('Please Login or Register');
+        this.router.navigate(['/auth/login']);
+      
     }
+    else{
+
+        
+        let orderData = {
+          items: this.cartItems,
+          createdBy: this.user.email,
+          status: 'ORDER',
+          date: new Date().toJSON(),
+          totalBillAmount: this.totalBillAmount,
+        };
+        console.log('e', orderData);
+  
+        this.orderService.placeOrder(orderData).subscribe((res) => {
+          this.toastr.success('Order Added Successfully');
+          this.service.emptyCart();
+          this.decreaseStock(this.cartItems);
+          this.router.navigate(['/myOrder']);
+        }, err => {
+          alert("Order Place Error came");
+        });
+    }
+  }
+
+  decreaseStock(cartItems:any){
+
+    for(let item of cartItems){
+      
+      this.productService.getProduct(item.id).subscribe(res=>{
+
+        let product:any = res;
+        product.stock -= item.unit ;
+        this.productService.updateProuductsStock(product).subscribe(res=>{
+          console.log(item +" stock updated");
+        })
+
+      })
+      
+    }
+    
   }
 
   emptyCart() {

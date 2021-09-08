@@ -10,6 +10,7 @@ import { ProductsComponent } from '../products/products.component';
 import { RemoveProductComponent } from '../remove-product/remove-product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { ItemAddedToCartDirective } from '../item-added-to-cart.directive';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -31,7 +32,8 @@ import { ItemAddedToCartDirective } from '../item-added-to-cart.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    NgxSpinnerModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   exports:[

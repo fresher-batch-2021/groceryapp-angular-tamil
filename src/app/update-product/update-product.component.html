@@ -1,16 +1,16 @@
-<h3 class="text-center mb-5">Add Product to List</h3>
-<form [formGroup]="addProductForm" (ngSubmit)="addProduct()" class="addProductForm">
+<h3 class="text-center mb-5">Update Product</h3>
+<form [formGroup]="updateProductForm" (ngSubmit)="updateProduct()" class="addProductForm">
     <div class="form-group">
         <label for="productName">Product Name</label>
-        <input type="text" formControlName="productName" class="form-control" name="productName" id="productName"
-            required>
+        <input type="text" [(ngModel)]="this.updateProductName" formControlName="productName" class="form-control" name="productName" id="productName"
+            required autocomplete="off">
     </div>
     <div class="form-group">
         <label for="unit">Unit</label>
-        <input formControlName="unit" class="form-control" type="number" name="unit" id="unit" required>
+        <input formControlName="unit" [(ngModel)]="this.updateUnit" class="form-control" type="number" name="unit" id="unit" required>
     </div>
     <div class="form-group">
-        <select name="type" id="type" formControlName="type" required>
+        <select name="type" id="type" [(ngModel)]="this.updateType" formControlName="type" required>
             <option value="" disabled hidden>Select Product Type</option>
             <option value="Kg">Kg</option>
             <option value="Pc">Pc</option>
@@ -18,7 +18,7 @@
         </select>
     </div>
     <div class="form-group">
-        <select name="category" id="category" formControlName="category" required>
+        <select name="category" id="category" [(ngModel)]="this.updateCategory" formControlName="category" required>
             <option value="" disabled hidden>Select Product category</option>
             <option value="Fruits">Fruits</option>
             <option value="Cookies">Cookies</option>
@@ -32,19 +32,13 @@
     </div>
     <div class="form-group">
         <label for="price">Price</label>
-        <input formControlName="price" type="number" class="form-control" name="price" id="price" required>
+        <input formControlName="price" [(ngModel)]="this.updatePrice"  type="number" class="form-control" name="price" id="price" required>
     </div>
-
-    <div class="form-group">
-        <label for="stock">Stock</label>
-        <input formControlName="stock" type="number" class="form-control" name="stock" id="stock" required>
-    </div>
-
     <div class="form-group">
         <label for="imgUrl">Image Url</label>
-        <input formControlName="imgUrl" type="text" class="form-control" name="imgUrl" id="imgUrl" required>
+        <input formControlName="imgUrl" [(ngModel)]="this.updateImageUrl"  type="text" class="form-control" name="imgUrl" id="imgUrl" required>
     </div>
     <div class="text-center">
-        <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!updateProductForm.valid">Submit</button>
     </div>
 </form>

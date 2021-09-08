@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { AdminGuard } from './admin.guard';
-import { AuthGuard } from './auth.guard';
-import { ChartComponent } from './chart/chart.component';
-import { HomeComponent } from './home/home.component';
-import { MyOrderComponent } from './my-order/my-order.component';
-import { OrderNowComponent } from './order-now/order-now.component';
-import { ProductCategoryComponent } from './product-category/product-category.component';
+import { AboutComponent } from '../app/about/about.component';
+import { AdminGuard } from '../app/admin.guard';
+import { AuthGuard } from '../app/auth.guard';
+import { HomeComponent } from '../app/home/home.component';
+import { MyOrderComponent } from '../app/my-order/my-order.component';
+import { OrderNowComponent } from '../app/order-now/order-now.component';
+import { ProductCategoryComponent } from '../app/product-category/product-category.component';
 
 
 const routes: Routes = [
@@ -24,9 +23,8 @@ const routes: Routes = [
   {
     path: "ordernow", component: OrderNowComponent,
   },
-  {
-    path: "flowChart", component: ChartComponent,
-  },
+
+
  
  
   {

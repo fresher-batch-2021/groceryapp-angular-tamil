@@ -21,10 +21,11 @@ export class RemoveProductComponent implements OnInit {
 
   getAllProducts() {
     this.productService.getAllProducts().subscribe((res: any) => {
-      let data = res.rows;
-      this.productList = data.map((obj: any) => obj.doc);
-      console.log('productList', this.productList);
-      this.ascProductList = _.orderBy(this.productList, ['category'], ['asc']);
+      let data = res.docs;
+      console.log(res.docs);
+      // this.productList = data.map((obj: any) => obj.doc);
+      console.log('productList', data);
+      this.ascProductList = _.orderBy(data, ['category'], ['asc']);
       console.log('Ascending Product List :', this.ascProductList);
     });
   }

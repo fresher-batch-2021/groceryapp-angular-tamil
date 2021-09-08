@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminListComponent } from '../admin-list/admin-list.component';
 import { AdminPanelComponent } from '../admin-panel/admin-panel.component';
+import { ChartComponent } from '../chart/chart.component';
 import { PlaceOrdersComponent } from '../place-orders/place-orders.component';
+import { UpdateProductComponent } from '../update-product/update-product.component';
 
 const routes: Routes = [
 
@@ -27,7 +29,13 @@ const routes: Routes = [
 
             {
                 path: "placeOrders", component: PlaceOrdersComponent
-            }
+            },
+            {
+                path: "updateProduct", component: UpdateProductComponent,
+            },
+            {
+                path: "flowChart", component: ChartComponent,
+            },
         ]
     }
 ];
