@@ -3,7 +3,6 @@ import { OrderService } from '../order.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { ProductsService } from '../products.service';
-import { Items, MyorderDto } from '../myorder-dto';
 
 @Component({
   selector: 'app-my-order',

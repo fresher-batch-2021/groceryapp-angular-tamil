@@ -15,6 +15,6 @@ export class ImageGalleryComponent {
   ngAfterViewInit()
   {
     console.log(this.input.nativeElement);
-    setTimeout(() => {(this.input.nativeElement);}, 2000);
+    // setTimeout(() => {(this.input.nativeElement);}, 2000);
   }
 }
