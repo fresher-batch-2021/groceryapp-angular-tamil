@@ -19,6 +19,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ErrorInterceptor } from './error.interceptor';
 import { NgContentComponent } from './ng-content/ng-content.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { NgContentComponent } from './ng-content/ng-content.component';
     ImageGalleryComponent,
     UpdateProductComponent,
     NgContentComponent,
+    PagenotfoundComponent,
     
 
   ],

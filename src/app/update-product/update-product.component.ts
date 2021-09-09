@@ -24,6 +24,7 @@ export class UpdateProductComponent implements OnInit {
   updateCategory : any;
   updatePrice : any;
   updateImageUrl : any;
+  updateStock : any;
 
   constructor(private fb: FormBuilder ,
     private router : Router,
@@ -43,7 +44,8 @@ export class UpdateProductComponent implements OnInit {
     this.updateType = this.getUpdateDetails.type;
     this.updateCategory = this.getUpdateDetails.category;
     this.updatePrice = this.getUpdateDetails.price;
-    this.updateImageUrl = this.getUpdateDetails.imageUrl;    
+    this.updateImageUrl = this.getUpdateDetails.imageUrl; 
+    this.updateStock = this.getUpdateDetails.stock;   
 
     this.updateProductForm = this.fb.group({
       productName: new FormControl("", Validators.required),
@@ -51,6 +53,7 @@ export class UpdateProductComponent implements OnInit {
       type: new FormControl("", Validators.required),
       category: new FormControl("", Validators.required),
       price: new FormControl("", Validators.required),
+      stock : new FormControl("", Validators.required),
       imgUrl: new FormControl("", Validators.required)
 
     })
@@ -76,7 +79,8 @@ export class UpdateProductComponent implements OnInit {
       unit: this.updateProductForm.value.unit,
       type: this.updateProductForm.value.type,
       category: this.updateProductForm.value.category,
-      imageUrl: this.updateProductForm.value.imgUrl
+      imageUrl: this.updateProductForm.value.imgUrl,
+      stock: this.updateProductForm.value.stock
     }
     console.log("obj", updateProductObj);
 

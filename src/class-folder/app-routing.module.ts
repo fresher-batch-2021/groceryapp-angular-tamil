@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PagenotfoundComponent } from 'src/app/pagenotfound/pagenotfound.component';
 import { AboutComponent } from '../app/about/about.component';
 import { AdminGuard } from '../app/admin.guard';
 import { AuthGuard } from '../app/auth.guard';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {
     path: "ordernow", component: OrderNowComponent,
   },
+  
 
 
  
@@ -49,6 +51,9 @@ const routes: Routes = [
   {
     path: "myOrder", component: MyOrderComponent, canActivate: [AuthGuard]
   },
+  {
+    path: "**", component: PagenotfoundComponent,
+  }
   
 ];
 
