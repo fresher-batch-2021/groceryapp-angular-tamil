@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ErrorInterceptor } from './error.interceptor';
+import { NgContentComponent } from './ng-content/ng-content.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ErrorInterceptor } from './error.interceptor';
     AboutComponent,
     ImageGalleryComponent,
     UpdateProductComponent,
+    NgContentComponent,
     
 
   ],
