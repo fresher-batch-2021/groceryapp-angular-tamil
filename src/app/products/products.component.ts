@@ -40,29 +40,36 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemslist = this.cartService.getCartItems();
+    this.itemslist = this.cartService.getCartItems();    
   }
 
   getProduct() {
 
-    this.spinner.show();
-    this.productService.getAvailableProducts().subscribe((res: any) => {      
-      let data: Productdto[] = res.docs;
-      console.log("check1", data);
+    try {
 
-      // this.products = data.map((obj: any) => obj.doc);
-      // console.log("pro", this.products);
-      // this.categories = _.groupBy(this.products, 'category');
-      // console.log("categories", this.categories);
+      this.spinner.show();
+      this.productService.getAvailableProducts().subscribe((res: any) => {      
+        let data: Productdto[] = res.docs;
+        console.log("check1", data);
+  
+        // this.products = data.map((obj: any) => obj.doc);
+        // console.log("pro", this.products);
+        // this.categories = _.groupBy(this.products, 'category');
+        // console.log("categories", this.categories);
+  
+        this.categories = _.groupBy(data, 'category');
+        console.log("check2", this.categories);
+  
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 1000);
+  
+      })
 
-      this.categories = _.groupBy(data, 'category');
-      console.log("check2", this.categories);
-
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 1000);
-
-    })
+    }
+    catch (err) {
+      console.log("error", err);
+    }
   }
 
   getProductItems(category: any) {

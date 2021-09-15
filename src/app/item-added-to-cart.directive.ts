@@ -7,7 +7,8 @@ export class ItemAddedToCartDirective {
 
   constructor(el: ElementRef) {
     console.log(el.nativeElement);
-    el.nativeElement.style.backgroundColor = 'yellow';
+    el.nativeElement.style.backgroundColor = 'mediumseagreen';
+    el.nativeElement.style.color = 'white';
  }
 
 }

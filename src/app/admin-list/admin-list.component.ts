@@ -18,19 +18,27 @@ export class AdminListComponent {
 
 
   adminList() {
-    let adminList = {
-      "selector": {
-        "role": "admin"
-      },
-      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+
+    try {
+
+      let adminList = {
+        "selector": {
+          "role": "admin"
+        },
+        "fields": ["_id", "_rev", "name", "mobileNo", "email", "password"]
+      }
+  
+  
+      this.adminService.listOfAdmin(adminList).subscribe((res: any) => {
+        this.adminDataList = res.docs;
+        console.log("Admindatalist", this.adminDataList);
+      }, err => {
+        alert("Something went wrong");
+      })
+
     }
-
-
-    this.adminService.listOfAdmin(adminList).subscribe((res: any) => {
-      this.adminDataList = res.docs;
-      console.log("Admindatalist", this.adminDataList);
-    }, err => {
-      alert("Something went wrong");
-    })
+    catch (err) {
+      console.error("error", err);
+    }
   }
 }

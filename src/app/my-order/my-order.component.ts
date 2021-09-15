@@ -30,25 +30,36 @@ export class MyOrderComponent implements OnInit {
 
   getAllProduct() {
     
-    this.orderService.getMyOrders(this.userEmail.email).subscribe(
-      (res: any) => {
-        console.log('res', res.docs);
-        this.placeOrderList = res.docs;
-        console.log('data', this.placeOrderList);
-        this.descPlaceOrderList = _.orderBy(
-          this.placeOrderList,
-          ['date'],
-          ['desc']
-        );
-        console.log('desc', this.descPlaceOrderList);
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
+    try {
+
+      this.orderService.getMyOrders(this.userEmail.email).subscribe(
+        (res: any) => {
+          console.log('res', res.docs);
+          this.placeOrderList = res.docs;
+          console.log('data', this.placeOrderList);
+          this.descPlaceOrderList = _.orderBy(
+            this.placeOrderList,
+            ['date'],
+            ['desc']
+          );
+          console.log('desc', this.descPlaceOrderList);
+        },
+        (err) => {
+          console.log('err', err);
+        }
+      );
+
+    }
+    catch (err)
+    {
+      console.error('err', err);
+    }
   }
 
   changeCancelled(order: any) {    
+
+   try
+   {
 
     let userOrderCancelled = prompt('Enter Reason');    
     if (
@@ -74,11 +85,19 @@ export class MyOrderComponent implements OnInit {
         document.location.reload();
       });
     }
+
+   }
+   catch (err)
+   {
+     console.error("error", err);
+   }
   }
 
   increaseStock(order : any)
   {
 
+   try {
+     
     console.log("order###", order.items);
 
     for(let item of order.items)
@@ -96,6 +115,11 @@ export class MyOrderComponent implements OnInit {
       })
 
     }
+
+   } catch (err) {
+     console.error("error", err);
+     
+   }
     
   }
 

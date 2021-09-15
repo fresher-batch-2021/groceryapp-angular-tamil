@@ -15,9 +15,12 @@ import { OrderService } from '../order.service';
 export class ChartComponent {
 
   deliveredDates : any;
-
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [ { ticks: {beginAtZero: true}
+      }],
+    }
   };
   barChartLabels: Label[] = [
     'Today',
@@ -25,7 +28,7 @@ export class ChartComponent {
     'Current Month',
     'Current Year',
   ];
-  barChartType: ChartType = 'doughnut';
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 

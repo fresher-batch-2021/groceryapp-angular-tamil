@@ -33,26 +33,34 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct() {
-    console.log("addProduct", this.addProductForm.value);
+   
+    try {
+      
+      console.log("addProduct", this.addProductForm.value);
 
-    let addProductObj = {
-      "name": this.addProductForm.value.productName,
-      "price": this.addProductForm.value.price,
-      "stock": this.addProductForm.value.stock,
-      "unit": this.addProductForm.value.unit,
-      "type": this.addProductForm.value.type,
-      "category": this.addProductForm.value.category,
-      "imageUrl": this.addProductForm.value.imgUrl
+      let addProductObj = {
+        "name": this.addProductForm.value.productName,
+        "price": this.addProductForm.value.price,
+        "stock": this.addProductForm.value.stock,
+        "unit": this.addProductForm.value.unit,
+        "type": this.addProductForm.value.type,
+        "category": this.addProductForm.value.category,
+        "imageUrl": this.addProductForm.value.imgUrl
+      }
+      console.log("addProductObj", addProductObj);
+  
+      this.productService.addNewProducts(addProductObj).subscribe((res: any) => {
+        this.toastr.success("Product added successfully");
+        console.log("addNewProducts Result", res);
+        window.location.reload();
+      }, err => {
+        console.log("err Message", err);
+      })
+      
+    } catch (err) 
+    {
+      console.error("error", err);  
     }
-    console.log("addProductObj", addProductObj);
-
-    this.productService.addNewProducts(addProductObj).subscribe((res: any) => {
-      this.toastr.success("Product added successfully");
-      console.log("addNewProducts Result", res);
-      window.location.reload();
-    }, err => {
-      console.log("err Message", err);
-    })
   }
 
 }

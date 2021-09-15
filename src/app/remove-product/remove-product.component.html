@@ -6,7 +6,7 @@
 
 
 <table border="1" aria-describedby="mydesc">
-    <thead>
+    <thead appItemAddedToCart>
         <th scope="col">S.no</th>
         <th scope="col">Product Name</th>
         <th scope="col">Price</th>
@@ -20,6 +20,6 @@
         <td>{{list.price}}</td>
         <td>{{list.imageUrl}}</td>
         <td>{{list.category}}</td>
-        <td><a class="badge" (click)="removeProduct(list._id, list._rev)">Delete</a></td>
+        <td><a class="badge" (click)="removeProduct(list._id, list._rev)"> <i style="color:red" class="fas fa-trash-alt"></i> Delete</a></td>
     </tbody>
 </table>

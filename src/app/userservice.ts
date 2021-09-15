@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginDTO } from '../class-folder/login-dto';
+import { RestServiceService } from './rest-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class Userservice {
   basicAuth =
     'Basic ' + btoa(environment.dbUsername + ':' + environment.dbPassword);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private restService: RestServiceService) {}
 
   userLogin(loginDTO: LoginDTO) {
     const loginObj = {
@@ -33,14 +34,13 @@ export class Userservice {
   }
 
   userRegister(registerObj: any) {
-    return this.http.post(environment.url + this.collectionName, registerObj);
+    // return this.http.post(environment.url + this.collectionName, registerObj);
+      return this.restService.save(this.collectionName, registerObj);
   }
 
   userList(userList: any) {
-    return this.http.post(
-      environment.url + this.collectionName + '/_find',
-      userList
-    );
+    // return this.http.post(environment.url + this.collectionName + '/_find',userList);
+      return this.restService.findByCriteria(this.collectionName, userList);
   }
 
   getAllUsers() {
@@ -51,10 +51,8 @@ export class Userservice {
       },
       sort: [{ registerDate: 'desc' }],
     };
-    return this.http.post(
-      environment.url + this.collectionName + '/_find',
-      getUserObj
-    );
+    // return this.http.post(environment.url + this.collectionName + '/_find', getUserObj);
+      return this.restService.findByCriteria(this.collectionName, getUserObj);
   }
 
   getUser() {
@@ -69,6 +67,7 @@ export class Userservice {
   userAccountStatus(users : any)
   {
     console.log("users", users);
-    return this.http.put(environment.url + this.collectionName+ "/" + users._id + "?rev=" + users._rev, users);
+    // return this.http.put(environment.url + this.collectionName+ "/" + users._id + "?rev=" + users._rev, users);
+      return this.restService.updateOne(this.collectionName, users._id, users);
   }
 }

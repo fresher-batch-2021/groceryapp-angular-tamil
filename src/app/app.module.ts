@@ -20,6 +20,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ErrorInterceptor } from './error.interceptor';
 import { NgContentComponent } from './ng-content/ng-content.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { MaterialModalComponent } from './material-modal/material-modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     UpdateProductComponent,
     NgContentComponent,
     PagenotfoundComponent,
+    MaterialModalComponent,
     
 
   ],
@@ -47,7 +51,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    
+    MatDialogModule,
+
 
     BrowserAnimationsModule,
     ToastrModule.forRoot({

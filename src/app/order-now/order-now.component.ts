@@ -63,7 +63,11 @@ export class OrderNowComponent implements OnInit {
 
 
   confirmOrder() {
-    if (this.user.email == null || this.user.email == '' || this.user.email == undefined){      
+   
+    try
+    {
+
+      if (this.user.email == null || this.user.email == '' || this.user.email == undefined){      
         this.toastr.error('Please Login or Register');
         this.router.navigate(['/auth/login']);
       
@@ -89,22 +93,34 @@ export class OrderNowComponent implements OnInit {
           alert("Order Place Error came");
         });
     }
+
+    }
+    catch (err) {
+      console.error("error", err);
+    }
   }
 
   decreaseStock(cartItems:any){
 
-    for(let item of cartItems){
-      
-      this.productService.getProduct(item.id).subscribe(res=>{
+    try{
 
-        let product:any = res;
-        product.stock -= item.unit ;
-        this.productService.updateProuductsStock(product).subscribe(res=>{
-          console.log(item +" stock updated");
+      for(let item of cartItems){
+      
+        this.productService.getProduct(item.id).subscribe(res=>{
+  
+          let product:any = res;
+          product.stock -= item.unit ;
+          this.productService.updateProuductsStock(product).subscribe(res=>{
+            console.log(item +" stock updated");
+          })
+  
         })
-
-      })
-      
+        
+      }
+    }
+    catch (error)
+    {
+      console.error("error", error);
     }
     
   }

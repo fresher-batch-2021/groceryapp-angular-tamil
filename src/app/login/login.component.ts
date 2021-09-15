@@ -38,7 +38,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("login res", this.loginForm.value);
+    
+    try {
+      
+      console.log("login res", this.loginForm.value);
 
     this.email = this.loginForm.value.email;
     this.password = this.loginForm.value.password;
@@ -91,6 +94,11 @@ export class LoginComponent implements OnInit {
           this.toastr.error("Invalid Email or Password");
         })
       }
+    }
+
+    } catch (err) {
+      
+      console.error("error", err)
     }
   }
 }

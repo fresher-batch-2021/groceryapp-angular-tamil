@@ -11,6 +11,7 @@ import { RemoveProductComponent } from '../remove-product/remove-product.compone
 import { ProductRoutingModule } from './product-routing.module';
 import { ItemAddedToCartDirective } from '../item-added-to-cart.directive';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -33,7 +34,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     HttpClientModule,
     ProductRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatDialogModule,
+
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   exports:[

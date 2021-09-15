@@ -17,36 +17,51 @@ export class UserListComponent {
   }
 
   userList() {
-    let userList = {
-      "selector": {
-        "role": "user"
-      },
-      "fields": ["_id", "_rev", "name", "mobileNo", "email", "password", "registerDate", "account"]
+
+    try {
+
+      let userList = {
+        "selector": {
+          "role": "user"
+        },
+        "fields": ["_id", "_rev", "name", "mobileNo", "email", "password", "registerDate", "account"]
+      }
+  
+  
+      this.userService.userList(userList).subscribe((res: any) => {
+        this.userDataList = res.docs;
+        console.log("datalist", this.userDataList);
+      }, err => {
+        alert("Something went wrong");
+      })
+
     }
-
-
-    this.userService.userList(userList).subscribe((res: any) => {
-      this.userDataList = res.docs;
-      console.log("datalist", this.userDataList);
-    }, err => {
-      alert("Something went wrong");
-    })
+    catch (err) {
+      console.error("error", err);
+    }
   }
 
 
   changeUserStatus(users : any)
   {
-    console.table(users.account);    
-    users.account = "Deactive";
-    users.role = "user";
 
+    try {
 
-    this.userService.userAccountStatus(users).subscribe((result : any) => {
-      console.log("status change result", result);      
-    }, err => {
-      alert("Account Status Change Error")
-    })
-
-    this.userList();
-  }
+      console.table(users.account);    
+      users.account = "Deactive";
+      users.role = "user";
+  
+  
+      this.userService.userAccountStatus(users).subscribe((result : any) => {
+        console.log("status change result", result);      
+      }, err => {
+        alert("Account Status Change Error")
+      })
+  
+      this.userList();
+    }
+    catch(err) {
+      console.error("error", err);
+    }
+    }
 }

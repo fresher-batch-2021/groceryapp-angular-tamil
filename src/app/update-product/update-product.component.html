@@ -1,16 +1,19 @@
-<h3 class="text-center mb-5">Update Product</h3>
+<div mat-dialog-content>
+    <h3 class="text-center mb-5">Update Product</h3>
+
+    <mat-form-field appearance="fill">
 <form [formGroup]="updateProductForm" (ngSubmit)="updateProduct()" class="addProductForm">
     <div class="form-group">
-        <label for="productName">Product Name</label>
-        <input type="text" [(ngModel)]="this.updateProductName" formControlName="productName" class="form-control" name="productName" id="productName"
+        <mat-label for="productName">Product Name</mat-label>
+        <input type="text" matInput [(ngModel)]="this.updateProductName" formControlName="productName" class="form-control" name="productName" id="productName"
             required autocomplete="off">
     </div>
     <div class="form-group">
-        <label for="unit">Unit</label>
-        <input formControlName="unit" [(ngModel)]="this.updateUnit" class="form-control" type="number" name="unit" id="unit" required>
+        <mat-label for="unit">Unit</mat-label>
+        <input formControlName="unit" matInput [(ngModel)]="this.updateUnit" class="form-control" type="number" name="unit" id="unit" required>
     </div>
     <div class="form-group">
-        <select name="type" id="type" [(ngModel)]="this.updateType" formControlName="type" required>
+        <select name="type" id="type" matInput [(ngModel)]="this.updateType" formControlName="type" required>
             <option value="" disabled hidden>Select Product Type</option>
             <option value="Kg">Kg</option>
             <option value="Pc">Pc</option>
@@ -18,7 +21,7 @@
         </select>
     </div>
     <div class="form-group">
-        <select name="category" id="category" [(ngModel)]="this.updateCategory" formControlName="category" required>
+        <select name="category" id="category" matInput [(ngModel)]="this.updateCategory" formControlName="category" required>
             <option value="" disabled hidden>Select Product category</option>
             <option value="Fruits">Fruits</option>
             <option value="Cookies">Cookies</option>
@@ -31,18 +34,25 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="price">Price</label>
-        <input formControlName="price" [(ngModel)]="this.updatePrice"  type="number" class="form-control" name="price" id="price" required>
+        <mat-label for="price">Price</mat-label>
+        <input formControlName="price" matInput [(ngModel)]="this.updatePrice"  type="number" class="form-control" name="price" id="price" required>
     </div>
     <div class="form-group">
-        <label for="stock">Stock</label>
-        <input formControlName="stock" [(ngModel)]="this.updateStock" type="number" class="form-control" name="stock" id="stock" required>
+        <mat-label for="stock">Stock</mat-label>
+        <input formControlName="stock" matInput [(ngModel)]="this.updateStock" type="number" class="form-control" name="stock" id="stock" required>
     </div>
     <div class="form-group">
-        <label for="imgUrl">Image Url</label>
-        <input formControlName="imgUrl" [(ngModel)]="this.updateImageUrl"  type="text" class="form-control" name="imgUrl" id="imgUrl" required>
+        <mat-label for="imgUrl">Image Url</mat-label>
+        <input formControlName="imgUrl" matInput [(ngModel)]="this.updateImageUrl"  type="text" class="form-control" name="imgUrl" id="imgUrl" required>
     </div>
     <div class="text-center">
         <button class="btn btn-primary" type="submit" [disabled]="!updateProductForm.valid">Submit</button>
     </div>
 </form>
+</mat-form-field>
+</div>
+
+<!-- <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  </div> -->

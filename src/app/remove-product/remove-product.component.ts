@@ -20,18 +20,28 @@ export class RemoveProductComponent implements OnInit {
   ngOnInit(): void {}
 
   getAllProducts() {
-    this.productService.getAllProducts().subscribe((res: any) => {
-      let data = res.docs;
-      console.log(res.docs);
-      // this.productList = data.map((obj: any) => obj.doc);
-      console.log('productList', data);
-      this.ascProductList = _.orderBy(data, ['category'], ['asc']);
-      console.log('Ascending Product List :', this.ascProductList);
-    });
+
+    try {
+      
+      this.productService.getAllProducts().subscribe((res: any) => {
+        let data = res.docs;
+        console.log(res.docs);
+        // this.productList = data.map((obj: any) => obj.doc);
+        console.log('productList', data);
+        this.ascProductList = _.orderBy(data, ['category'], ['asc']);
+        console.log('Ascending Product List :', this.ascProductList);
+      });
+
+    } catch (err) {
+      console.error("error", err);
+    }
   }
 
   removeProduct(id: any, rev: any) {
-    console.log('id', id);
+    
+    try {
+      
+      console.log('id', id);
     console.log('rev', rev);
 
     Swal.fire({
@@ -58,5 +68,9 @@ export class RemoveProductComponent implements OnInit {
         );
       }
     });
+    
+    } catch (err) {
+      console.error("error", err);
+    }
   }
 }

@@ -43,18 +43,25 @@ export class ProductCategoryComponent implements OnInit {
 
   getProduct() {
 
-    this.productService.getAvailableProducts().subscribe((res: any) => {
-      let data: Productdto[] = res.docs;
+    try {
+      
+      this.productService.getAvailableProducts().subscribe((res: any) => {
+        let data: Productdto[] = res.docs;
+  
+        // this.products = data.map((obj: any) => obj.doc);
+        // console.log("pro", this.products);
+  
+        this.categories = _.groupBy(data, 'category');
+        console.log("categories", this.categories[this.viewCategory]);
+        this.items = this.categories[this.viewCategory];
+        console.log("items", this.items);
+  
+      })
 
-      // this.products = data.map((obj: any) => obj.doc);
-      // console.log("pro", this.products);
-
-      this.categories = _.groupBy(data, 'category');
-      console.log("categories", this.categories[this.viewCategory]);
-      this.items = this.categories[this.viewCategory];
-      console.log("items", this.items);
-
-    })
+    } catch (err) {
+      
+      console.error("error", err);
+    }
   }
 
   addCart(id: string, rev: string, productName: string, qty: number, type: string, price: number, stock : number, category : string, imgUrl : string, stocktype : string) {

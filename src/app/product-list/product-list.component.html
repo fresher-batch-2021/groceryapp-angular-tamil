@@ -21,6 +21,23 @@
         <td>{{list.price}}</td>
         <td>{{list.imageUrl}}</td>
         <td>{{list.category}}</td>
-        <td><a (click)=editProduct(list)>Update</a></td>
+        <td><a mat-raised-button (click)="openDialog(i,list)">Update</a></td>
     </tbody>
 </table>
+
+
+<!-- <ol>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>What's your name?</mat-label>
+        <input matInput [(ngModel)]="name">
+      </mat-form-field>
+    </li>
+    <li>
+      <button mat-raised-button (click)="openDialog()">Pick one</button>
+    </li>
+    <li *ngIf="animal">
+      You chose: <i>{{animal}}</i>
+    </li>
+  </ol> -->
+  
