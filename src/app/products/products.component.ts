@@ -40,7 +40,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemslist = this.cartService.getCartItems();    
+    this.itemslist = this.cartService.getCartItems();
   }
 
   getProduct() {
