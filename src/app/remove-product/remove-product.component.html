@@ -1,4 +1,5 @@
-<h3 class="text-center mb-5">Product Remove to List</h3>
+<section>
+    <h3 class="text-center mb-5">Product Remove to List</h3>
 
 <div class="text-center mb-5">
     <input type="text" name="category" id="category" [(ngModel)]="selectedCategory" placeholder="        Search Ex: apple">
@@ -23,3 +24,4 @@
         <td><a class="badge" (click)="removeProduct(list._id, list._rev)"> <i style="color:red" class="fas fa-trash-alt"></i> Delete</a></td>
     </tbody>
 </table>
+</section>
